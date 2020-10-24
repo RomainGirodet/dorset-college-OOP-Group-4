@@ -6,5 +6,11 @@ namespace OOPGroup4
 {
     class Evaluation
     {
+        string date;
+        string matter;
+        string teacher;
+        //grade
+        string type;
+        //coef
     }
 }

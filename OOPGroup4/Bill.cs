@@ -6,5 +6,9 @@ namespace OOPGroup4
 {
     class Bill
     {
+        string description;
+        int amount;
+        int delay;
+        int priority;
     }
 }
