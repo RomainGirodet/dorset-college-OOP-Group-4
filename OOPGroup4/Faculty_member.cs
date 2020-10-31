@@ -11,6 +11,7 @@ namespace OOPGroup4
 
         public List<Class> liste_Classe { get; set; }
         public List<Student> my_student { get; set; }
+        public List<Class> my_classes ;
 
         public Faculty_member()
         {
@@ -29,8 +30,13 @@ namespace OOPGroup4
 
         }
         public void Repport_Missing(Student mickael)
-        {
 
+        {    if (langages.Contains(mickael) == true) { 
+                Absence(mickael);
+                
+            }
+        else {  Console.WriteLine($" the student {mickael.name} is not one of your student")
+            }
         }
 
 

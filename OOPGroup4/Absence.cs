@@ -6,9 +6,11 @@ namespace OOPGroup4
 {
     class Absence
     {
-        string cours;
-             // date
-              //hours
+        public string cours {get;set;}
+        public  string  date {get;set;}
+        public string   hours {get;set;}
             //timeslot
+        public Absence (Student a){
+        }
     }
 }
