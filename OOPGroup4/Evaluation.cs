@@ -6,11 +6,17 @@ namespace OOPGroup4
 {
     class Evaluation
     {
-        string date;
-        string matter;
-        string teacher;
-        //grade
-        string type;
+         public  string date;
+        public  string matter;
+        public string teacher;
+        public int grade;
+        public string type;
         //coef
+        public Evaluation(int grade, string type, string matter)
+        {
+            this.matter = matter;
+            this.type = type;
+            this.grade = grade;
+        }
     }
 }
