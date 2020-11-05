@@ -47,21 +47,24 @@ namespace OOPGroup4
         /// <param name="listClasse"></param>
         /// <param name="nomClasse"></param>
         /// <param name="listSubject"></param>
-        public void Add_SubjectToTimetable(string studentID ,List<Subject> listSubject)
+        public void Add_SubjectToTimetable(string studentID)
         {
 
         }
         
-
         public void Delete_SubjectFromTimetable(string studentID)
         {
 
         }
-        public void Exchange_SubjectFromTimetable(string studentID, List<Subject> listSubject)
+        //public void Exchange_SubjectFromTimetable(string studentID, List<Subject> listSubject)
+        //{
+
+        //}
+        public void Move_SubjectFromTimetable(string studentID)
         {
 
         }
-        public void Move_SubjectFromTimetable(string studentID, List<Subject> listSubject)
+        public void Modify_SubjectFromTimetable(string studentID)
         {
 
         }

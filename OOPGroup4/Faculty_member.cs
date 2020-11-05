@@ -6,5 +6,6 @@ namespace OOPGroup4
 {
     class Faculty_member
     {
+
     }
 }
