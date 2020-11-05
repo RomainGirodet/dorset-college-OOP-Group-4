@@ -7,7 +7,7 @@ namespace OOPGroup4
 {
     class Admin : Member_of_school
     {
-        List<string>[,] AdminTimeTable= new List<string>[13,7];
+        //List<string>[,] AdminTimeTable= new List<string>[13,7];
         
         public Admin(string place, string school_name, int number_of_student, string id, string name, string surname, string password,
             int age, string sexe, string mail) : base(place, name, number_of_student, id, name, surname, password, age, sexe, mail)
@@ -15,37 +15,7 @@ namespace OOPGroup4
 
         }
 
-        #region Class_Fonction
-
-        /// <summary>
-        /// Create a new Class.
-        /// Choose a name, the differents students in it and the teacher in charge of them.
-        /// </summary>
-        /// <param name="listClass"></param>
-        /// <param name="listStudent"></param>
-        /// <param name="listTeacher"></param>
-        public void ClassCreation(List<Class> listClass, List<Student> listStudent, List<Faculty_member> listTeacher)
-        {
-
-        }
-        /// <summary>
-        /// Change the teacher in charge of a class.
-        /// </summary>
-        /// <param name="listClass"></param>
-        /// <param name="listTeacher"></param>
-        public void ChangingClassTeacher(List<Class> listClass, List<Faculty_member> listTeacher)
-        {
-
-        }
-        /// <summary>
-        /// Change the name of a Class. Two classes can't have the same name.
-        /// </summary>
-        /// <param name="listClass"></param>
-        public void ChangingClassName(List<Class> listClass)
-        {
-
-        }
-        #endregion
+      
         #region Subject_fonction
         // Créer une nouvellle matière
         public void NewSubject(List<Subject> listSubject, string name)
@@ -57,24 +27,16 @@ namespace OOPGroup4
         {
 
         }
-        /// <summary>
-        /// Allow to change a student from one class to another.
-        /// </summary>
-        /// <param name="nameStudentToChange"></param>
-        /// <param name="listClass"></param>
-        static void ChangementDeClasse( string nameStudentToChange, List<Class> listClass)
-        {
-
-        }
+       
         #endregion
         #region TimeTable_function
         /// <summary>
-        /// Create a new timeTable for a classe.
+        /// Create a new timeTable.
         /// </summary>
         /// <param name="listClasse"></param>
         /// <param name="nomClasse"></param>
         /// <param name="listSubject"></param>
-        public void CreateTimeTable(List<Class> listClasse, string nomClasse, List<Subject> listSubject)
+        public void CreateTimeTable()
         {
 
         }
@@ -85,29 +47,59 @@ namespace OOPGroup4
         /// <param name="listClasse"></param>
         /// <param name="nomClasse"></param>
         /// <param name="listSubject"></param>
-        public void Add_SubjectToTimetable(List<Class> listClasse, string nomClasse, List<Subject> listSubject)
+        public void Add_SubjectToTimetable(string studentID ,List<Subject> listSubject)
         {
 
         }
+        
+
+        public void Delete_SubjectFromTimetable(string studentID)
+        {
+
+        }
+        public void Exchange_SubjectFromTimetable(string studentID, List<Subject> listSubject)
+        {
+
+        }
+        public void Move_SubjectFromTimetable(string studentID, List<Subject> listSubject)
+        {
+
+        }
+        #endregion
+        #region Payement_and_Invoice_Function
+        public void MofifyInvoiceDeadline(string studentID)
+        {
+
+        }
+        public void MofifyInvoiceAmount(string studentID)
+        {
+
+        }
+        public void MofifyInvoiceName(string studentID)
+        {
+
+        }
+
+        #endregion
+        #region Absence_fonction
         /// <summary>
-        /// Allows to delete, modify the shedule or the countain of a course.
+        /// Allows to change the parameter "active" from the absence from 1 to 0.
+        /// The admin can then add a comment to justificate the absence.
         /// </summary>
-        /// <param name="listClasse"></param>
-        /// <param name="nomClasse"></param>
-        /// <param name="listSubject"></param>
-        public void ModifyTimeTable(List<Class> listClasse, string nomClasse, List<Subject> listSubject)
+        /// <param name="nameStudent"></param>
+        public void JustifyAnAbsence(string studentID)
         {
 
         }
         #endregion
         #region Get_information_fonction
-     
+
         /// <summary>
         /// Get the name, field of study, name of the class supervised, 
         /// nb of hours worked per week and the information relative 
         /// to the classe Member_of_school
         /// </summary>
-        public void getTeacherFile()
+        public void getTeacherFile(string teacherID)
         {
 
         }
@@ -116,25 +108,37 @@ namespace OOPGroup4
         /// in addition of the name of the class, the number of absences and 
         /// a boolean saying if the student has payed everithing.
         /// </summary>
-        public void GetStudentFile()
+        public void GetStudentFile(string studentID)
         {
 
         }
         /// <summary>
-        /// Get the historical of the bills payed, their date and amount.
-        /// Then print all the domain in wich the student must paid specifying if he has yet payed,
-        /// and if not how much he has to pay.
+        /// Get the historic of the bills payed, their date and amount.
         /// 
         /// </summary>
-        public void GetStudentBillHistoric()
+        public void GetStudentBillHistoric(string studentID)
+        {
+
+        }
+        /// <summary>
+        /// Get the historic of the bills payed linked to a specific invoice with their date and amount.
+        /// </summary>
+        public void GetStudentBillHistoricOfOneInvoice(string studentID)
+        {
+
+        }
+        /// <summary>
+        /// Get all the invoice of the student with the amount to pay, the amount already payed and the deadline.
+        /// </summary>
+        public void GetStudentInvoice(string studentID)
         {
 
         }
         /// <summary>
         /// Get all the grade of the student sorted by domain with the average in each domain 
-        /// Get also the average gradeof the student.
+        /// Get also the average grade of the student.
         /// </summary>
-        public void GetStudentGrade()
+        public void GetStudentGrade(string studentID)
         {
 
         }
@@ -142,11 +146,12 @@ namespace OOPGroup4
         /// Get the historical of the student's absences with their date 
         /// and a comment on their justification.
         /// </summary>
-        public void GetStudentAbsenceHistorical()
+        public void GetStudentAbsenceHistorical(string studentID)
         {
 
         }
         #endregion
         
+
     }
 }
