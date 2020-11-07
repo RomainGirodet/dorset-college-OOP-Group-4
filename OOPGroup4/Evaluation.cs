@@ -7,10 +7,11 @@ namespace OOPGroup4
     class Evaluation
     {
         string date;
-        string matter;
+        public string matter;
         string teacher;
-        //grade
+       public  bool grade ;
         string type;
-        //coef
+        public int coef ;
+        public bool classMoy ;
     }
 }

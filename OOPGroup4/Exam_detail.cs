@@ -16,19 +16,31 @@ namespace OOPGroup4
         }
         public int Nb_Evaluation()
         {
-            return 0;
+            return student_Evaluation.Count ;
         }
         public double Moy()
         {
-            return 0;
+           return classMoy;
         }
         public Evaluation Last_Exam()
         {
-            return new Evaluation();
+            return student_Evaluation[student_Evaluation.Count - 1];
         }
         public double Moy_Mat(string matter)
         {
-            return 0;
+            double sum =null ;
+            double coef =0; 
+            foreach (Evaluation eval in student_Evaluation ){
+                if (eval.matter == matter){
+            sum += eval.grade*eval.coef;
+            coef += eval.coef ;
+                }
+            }
+      
+            if (coef!= 0){  
+                double moy = ( sum/ coef ) ;
+                return moy;}
+            else {return null ;}
         }
 
     }
