@@ -4,11 +4,8 @@ using System.Text;
 
 namespace OOPGroup4
 {
-    class Bill
+    class Payment
     {
-        string description;
-        int amount;
-        int delay;
-        int priority;
+
     }
 }
