@@ -8,16 +8,18 @@ namespace OOPGroup4
     {
         List<Student> listStudentPromo;
         List<Faculty_member> listTeacherPromo;
-        List<Class> listClassPromo;
-        //List<Subject> ListClassSubject;
+        
+        List<Subject> ListClassSubject;
 
-        public Promotion(List<Student> listStudentPromo,List<Faculty_member> listTeacherPromo,List<Class> listClassPromo)
+        public Promotion(List<Student> listStudentPromo,List<Faculty_member> listTeacherPromo)
         {
-            this.listClassPromo = listClassPromo;
+            
             this.listStudentPromo = listStudentPromo;
             this.listTeacherPromo = listTeacherPromo;
 
-           // this.ListClassSubject = new List<Subject>;
+           
         }
+
+
     }
 }

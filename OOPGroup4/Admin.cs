@@ -70,6 +70,10 @@ namespace OOPGroup4
         }
         #endregion
         #region Payement_and_Invoice_Function
+        public void CreateInvoice(string studentID)
+        {
+
+        }
         public void MofifyInvoiceDeadline(string studentID)
         {
 
@@ -102,7 +106,7 @@ namespace OOPGroup4
         /// nb of hours worked per week and the information relative 
         /// to the classe Member_of_school
         /// </summary>
-        public void getTeacherFile(string teacherID)
+        public void GetTeacherFile(string teacherID)
         {
 
         }
