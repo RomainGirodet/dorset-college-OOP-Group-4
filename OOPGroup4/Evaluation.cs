@@ -6,12 +6,12 @@ namespace OOPGroup4
 {
     class Evaluation
     {
-        string date;
+        public string date;
         public string matter;
-        string teacher;
-       public  bool grade ;
-        string type;
+        public string teacher;
+       public  double grade ;
+      public  string type;
         public int coef ;
-        public bool classMoy ;
+        public double classMoy ;
     }
 }
