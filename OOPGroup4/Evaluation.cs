@@ -10,7 +10,7 @@ namespace OOPGroup4
         public string matter;
         public string teacher;
        public  double grade ;
-      public  string type;
+        public  string type;
         public int coef ;
         public double classMoy ;
     }

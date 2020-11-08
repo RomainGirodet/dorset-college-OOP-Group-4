@@ -9,7 +9,7 @@ namespace OOPGroup4
 
     class Exam_detail
     {
-        public SortedList<string, Evaluation> student_Evaluation { get; set; }
+        public List<Evaluation> student_Evaluation { get; set; }
         public Exam_detail()
         {
 
@@ -20,15 +20,16 @@ namespace OOPGroup4
         }
         public double Moy()
         {
-           return classMoy;
+            // return classMoy;
+            return 0;
         }
         public Evaluation Last_Exam()
         {
-            return student_Evaluation[student_Evaluation.Count - 1];
+            return student_Evaluation[student_Evaluation.Count -1 ];
         }
         public double Moy_Mat(string matter)
         {
-            double sum =null ;
+            double sum = 0 ;
             double coef =0; 
             foreach (Evaluation eval in student_Evaluation ){
                 if (eval.matter == matter){
@@ -40,7 +41,7 @@ namespace OOPGroup4
             if (coef!= 0){  
                 double moy = ( sum/ coef ) ;
                 return moy;}
-            else {return null ;}
+            else {return -1 ;}
         }
 
     }
