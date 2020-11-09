@@ -10,6 +10,7 @@ namespace OOPGroup4
         //test 2.1
         //coucou alexis :)
         //vive Napoléon Bonaparte 
+        // All-in Doge
         // Champs :
 
         public string classes; // Name of classes.
