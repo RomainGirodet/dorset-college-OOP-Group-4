@@ -90,7 +90,7 @@ namespace OOPGroup4
         #endregion
         #region Absence_fonction
         /// <summary>
-        /// Allows to change the parameter "active" from the absence from 1 to 0.
+        /// Allows to change the parameter "active" from the absence from 1 to 0. test
         /// The admin can then add a comment to justificate the absence.
         /// </summary>
         /// <param name="nameStudent"></param>
