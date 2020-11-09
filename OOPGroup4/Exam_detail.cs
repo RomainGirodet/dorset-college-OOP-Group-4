@@ -20,7 +20,7 @@ namespace OOPGroup4
         }
         public double Moy()
         {
-            // return classMoy;
+            // return classMoy a creer si necesaire;
             return 0;
         }
         public Evaluation Last_Exam()
