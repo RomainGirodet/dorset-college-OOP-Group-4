@@ -6,6 +6,9 @@ namespace OOPGroup4
 {
     class Absence
     {
+        // Test branche push
+
+
         // Champs :
 
         public string classes; // Name of classes.
