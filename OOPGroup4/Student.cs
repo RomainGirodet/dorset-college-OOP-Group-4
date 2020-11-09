@@ -14,7 +14,8 @@ namespace OOPGroup4
         }
         void Pay(string payer_name, string payment_method, double amount)
         {
-
+            Payment payment = new Payment(payer_name, payment_method, amount);
+            payment_list.Add(payment);
         }
     }
 }
