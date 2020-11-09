@@ -16,6 +16,7 @@ namespace OOPGroup4
         {
             //test_Push-Romain_Girodet
             //test fusion 1
+            //test faculty_member_2
 
             List<Student> listStudentPromoTest=new List<Student>();
             List<Faculty_member> listTeacherPromoTest=new List<Faculty_member>();
