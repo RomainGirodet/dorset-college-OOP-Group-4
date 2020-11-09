@@ -10,8 +10,8 @@ namespace OOPGroup4
         private string subject;
         private List<Student> myStudent;
 
-        public Faculty_member(string place, string school_name, int number_of_student,string id, string name, string surname, string password, int age, string sex, string email, string subject, List<Student> myStudent)
-            : base(place, name, number_of_student,id, name, surname, password, age, sex, email)
+        public Faculty_member(string place, string school_name, string id, string name, string surname, string password, int age, string sex, string email, string subject, List<Student> myStudent)
+            : base(place, name,id, name, surname, password, age, sex, email)
         {
             this.subject = subject;
             this.myStudent = myStudent;

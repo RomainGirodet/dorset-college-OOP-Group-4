@@ -10,7 +10,7 @@ namespace OOPGroup4
         //List<string>[,] AdminTimeTable= new List<string>[13,7];
         
         public Admin(string place, string school_name, int number_of_student, string id, string name, string surname, string password,
-            int age, string sexe, string mail) : base(place, name, number_of_student, id, name, surname, password, age, sexe, mail)
+            int age, string sexe, string mail) : base(place, name, id, name, surname, password, age, sexe, mail)
         {
 
         }
@@ -18,12 +18,12 @@ namespace OOPGroup4
       
         #region Subject_fonction
         // Créer une nouvellle matière
-        public void NewSubject(List<Subject> listSubject, string name)
+        public void NewSubject(List<Course> listSubject, string name)
         {
 
         }
         //Changer le nom d'une matière
-        public void ChangeSubjectName(List<Subject> listSubject, string newName, string OldName)
+        public void ChangeSubjectName(List<Course> listSubject, string newName, string OldName)
         {
 
         }
@@ -56,7 +56,7 @@ namespace OOPGroup4
         {
 
         }
-        //public void Exchange_SubjectFromTimetable(string studentID, List<Subject> listSubject)
+        //public void Exchange_SubjectFromTimetable(string studentID, List<Course> listSubject)
         //{
 
         //}

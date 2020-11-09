@@ -9,7 +9,7 @@ namespace OOPGroup4
         List<Student> listStudentPromo;
         List<Faculty_member> listTeacherPromo;
         
-        List<Subject> ListClassSubject;
+        List<string> ListClassSubject;
 
         public Promotion(List<Student> listStudentPromo,List<Faculty_member> listTeacherPromo)
         {

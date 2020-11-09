@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OOPGroup4
 {
-    class Subject
+    class Course
     {
     }
 }

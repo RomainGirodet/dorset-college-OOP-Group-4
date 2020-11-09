@@ -6,8 +6,8 @@ namespace OOPGroup4
 {
     class Student
     {
-        private List<Absence> missing_class ;
-        private Timetable timetable ;
+        //private List<Absence> missing_class ;
+       // private Timetable timetable ;
         
     
     }
