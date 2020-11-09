@@ -8,7 +8,7 @@ namespace OOPGroup4
     {
         private List<Payment> payment_list;
         private List<Absence> absence_list;
-        public Student(string place, string school_name, int number_of_student, string id, string name, string surname, string password, int age, string sexe, string mail) : base(place, name, number_of_student, id, name, surname, password, age, sexe, mail)
+        public Student(string place, string school_name, string id, string name, string surname, string password, int age, string sexe, string mail) : base(place, name, id, name, surname, password, age, sexe, mail)
         {
 
         }

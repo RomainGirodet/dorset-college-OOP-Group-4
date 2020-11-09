@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OOPGroup4
 {
-    class Absences
+    class Absence
     {
         // Champs :
 
@@ -18,7 +18,7 @@ namespace OOPGroup4
 
         // Constructeur :
 
-        public Absences(string classes, int date, int timeslot, int time) // Don't need active because it's 1 by default, nether comments because it's optional.
+        public Absence(string classes, int date, int timeslot, int time) // Don't need active because it's 1 by default, nether comments because it's optional.
         {
             this.classes = classes;
             this.date = date;
