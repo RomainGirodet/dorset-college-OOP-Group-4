@@ -7,8 +7,8 @@ namespace OOPGroup4
 {
     class Admin : Member_of_school
     {
-        //List<string>[,] AdminTimeTable= new List<string>[13,7];
-        
+       
+        //test admin promo 2
         public Admin(string place, string school_name, int number_of_student, string id, string name, string surname, string password,
             int age, string sexe, string mail) : base(place, name, id, name, surname, password, age, sexe, mail)
         {
