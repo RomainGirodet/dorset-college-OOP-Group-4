@@ -29,7 +29,7 @@ namespace OOPGroup4
             DateTime nationalFest = new DateTime(year2, 7, 14);
             DateTime assomption = new DateTime(year2, 8, 15);
 
-
+            #region Calculation of Easter Date
             int n = year2 % 19;
             int c = year2 / 100;
             int u = year2 % 100;
@@ -47,6 +47,7 @@ namespace OOPGroup4
             DateTime easter = new DateTime(year2, m, j + 1);
             DateTime ascension = easter.AddDays(40);
             DateTime pentecost = easter.AddDays(49);
+            #endregion
 
             int months = 9;
             int days = 1;
@@ -118,7 +119,7 @@ namespace OOPGroup4
                 {
                     for(int k = 0; k < timeTable.GetLength(1); k++)
                     {
-                        timeTable[i, j] = new Course();
+                        timeTable[i, j] = new Course("HOLIDAY");
                     }
                 }
             }
