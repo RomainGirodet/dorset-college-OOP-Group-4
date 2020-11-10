@@ -8,19 +8,24 @@ namespace OOPGroup4
     class Timetable
     {
         public Course[,] timeTable; //Matrix representing the Timetable on 1 year
-        public List<DayOfWeek> DayOfWeeks;
-        public DateTime[] date;
+        public DateTime[] date; // Array representing all the days used in Timetable
 
         /// <summary>
-        /// Function which creates a new Timetable for a student 
+        /// Function which creates a new Timetable for a person 
         /// </summary>
         public void CreateTimetable(int year, int year2)
         {
-            Calendar calendarBasics = CultureInfo.InvariantCulture.Calendar;
-            int daysInYear = calendarBasics.GetDaysInYear(year2);
-            timeTable = new Course[daysInYear, 24];
+            #region Intilization of a matrix representing TmeTable
 
-            DateTime firstNovember = new DateTime(year, 11, 1);
+            Calendar calendarBasics = CultureInfo.InvariantCulture.Calendar;
+            int daysInYear = calendarBasics.GetDaysInYear(year2); //researched the number of days in year2
+            timeTable = new Course[daysInYear, 24]; // timeTable initialization
+
+            #endregion
+
+            #region Holiday dates fixed each year
+
+            DateTime firstNovember = new DateTime(year, 11, 1); 
             DateTime armistice = new DateTime(year, 11, 11);
             DateTime christmas = new DateTime(year, 12, 25);
             DateTime newYearsDay = new DateTime(year2, 1, 1);
@@ -29,7 +34,11 @@ namespace OOPGroup4
             DateTime nationalFest = new DateTime(year2, 7, 14);
             DateTime assomption = new DateTime(year2, 8, 15);
 
+            #endregion 
+
             #region Calculation of Easter Date
+
+            // Using of the Algorithm of Butcher-Meeus
             int n = year2 % 19;
             int c = year2 / 100;
             int u = year2 % 100;
@@ -45,9 +54,13 @@ namespace OOPGroup4
             int m = (e + l - 7 * h + 114) / 31;
             int j = (e + l - 7*h + 114) % 31;
             DateTime easter = new DateTime(year2, m, j + 1);
+            // this two dates are in function of the easter day
             DateTime ascension = easter.AddDays(40);
             DateTime pentecost = easter.AddDays(49);
+
             #endregion
+
+            #region initilization of a array representing all the date in the Timetable
 
             int months = 9;
             int days = 1;
@@ -123,6 +136,8 @@ namespace OOPGroup4
                     }
                 }
             }
+
+            #endregion
         }
     }
 }
