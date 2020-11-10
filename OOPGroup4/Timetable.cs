@@ -13,35 +13,35 @@ namespace OOPGroup4
         /// <summary>
         /// Function which creates a new Timetable for a person 
         /// </summary>
-        public void CreateTimetable(int startyear, int startmonth, int startday)
+        public void CreateTimetable(int startYear, int startMonth, int startDay)
         {
             #region Intilization of a matrix representing TmeTable
 
             Calendar calendarBasics = CultureInfo.InvariantCulture.Calendar;
-            int daysInYear = calendarBasics.GetDaysInYear(startyear+1); //researched the number of days in year2
+            int daysInYear = calendarBasics.GetDaysInYear(startYear+1); //researched the number of days in year2
             timeTable = new Course[daysInYear, 24]; // timeTable initialization
 
             #endregion
 
             #region Holiday dates fixed each year
 
-            DateTime firstNovember = new DateTime(startyear, 11, 1); 
-            DateTime armistice = new DateTime(startyear, 11, 11);
-            DateTime christmas = new DateTime(startyear, 12, 25);
-            DateTime newYearsDay = new DateTime(startyear+1, 1, 1);
-            DateTime laborDay = new DateTime(startyear+1, 5, 1);
-            DateTime secondArmistice = new DateTime(startyear+1, 5, 8);
-            DateTime nationalFest = new DateTime(startyear+1, 7, 14);
-            DateTime assomption = new DateTime(startyear+1, 8, 15);
+            DateTime firstNovember = new DateTime(startYear, 11, 1); 
+            DateTime armistice = new DateTime(startYear, 11, 11);
+            DateTime christmas = new DateTime(startYear, 12, 25);
+            DateTime newYearsDay = new DateTime(startYear+1, 1, 1);
+            DateTime laborDay = new DateTime(startYear+1, 5, 1);
+            DateTime secondArmistice = new DateTime(startYear+1, 5, 8);
+            DateTime nationalFest = new DateTime(startYear+1, 7, 14);
+            DateTime assomption = new DateTime(startYear+1, 8, 15);
 
             #endregion 
 
             #region Calculation of Easter Date
 
             // Using of the Algorithm of Butcher-Meeus
-            int n = (startyear+1) % 19;
-            int c = (startyear+1) / 100;
-            int u = (startyear+1) % 100;
+            int n = (startYear+1) % 19;
+            int c = (startYear+1) / 100;
+            int u = (startYear+1) % 100;
             int s = c / 4;
             int t = c % 4;
             int p = (c + 8) / 25;
@@ -53,7 +53,7 @@ namespace OOPGroup4
             int h = (n + 11*e + 22*l) / 451;
             int m = (e + l - 7 * h + 114) / 31;
             int j = (e + l - 7*h + 114) % 31;
-            DateTime easter = new DateTime(startyear+1, m, j + 1);
+            DateTime easter = new DateTime(startYear+1, m, j + 1);
             // this two dates are in function of the easter day
             DateTime ascension = easter.AddDays(40);
             DateTime pentecost = easter.AddDays(49);
@@ -63,7 +63,7 @@ namespace OOPGroup4
             #region initilization of a array representing all the date in the Timetable
 
             date = new DateTime[daysInYear];
-            date[0] = new DateTime(startyear, startmonth, startday);
+            date[0] = new DateTime(startYear, startMonth, startDay);
             for (int i = 1; i < daysInYear; i++)
             {
                 date[i] = date[0].AddDays(i);
