@@ -13,35 +13,35 @@ namespace OOPGroup4
         /// <summary>
         /// Function which creates a new Timetable for a person 
         /// </summary>
-        public void CreateTimetable(int year, int year2)
+        public void CreateTimetable(int startyear, int startmonth, int startday)
         {
             #region Intilization of a matrix representing TmeTable
 
             Calendar calendarBasics = CultureInfo.InvariantCulture.Calendar;
-            int daysInYear = calendarBasics.GetDaysInYear(year2); //researched the number of days in year2
+            int daysInYear = calendarBasics.GetDaysInYear(startyear+1); //researched the number of days in year2
             timeTable = new Course[daysInYear, 24]; // timeTable initialization
 
             #endregion
 
             #region Holiday dates fixed each year
 
-            DateTime firstNovember = new DateTime(year, 11, 1); 
-            DateTime armistice = new DateTime(year, 11, 11);
-            DateTime christmas = new DateTime(year, 12, 25);
-            DateTime newYearsDay = new DateTime(year2, 1, 1);
-            DateTime laborDay = new DateTime(year2, 5, 1);
-            DateTime secondArmistice = new DateTime(year2, 5, 8);
-            DateTime nationalFest = new DateTime(year2, 7, 14);
-            DateTime assomption = new DateTime(year2, 8, 15);
+            DateTime firstNovember = new DateTime(startyear, 11, 1); 
+            DateTime armistice = new DateTime(startyear, 11, 11);
+            DateTime christmas = new DateTime(startyear, 12, 25);
+            DateTime newYearsDay = new DateTime(startyear+1, 1, 1);
+            DateTime laborDay = new DateTime(startyear+1, 5, 1);
+            DateTime secondArmistice = new DateTime(startyear+1, 5, 8);
+            DateTime nationalFest = new DateTime(startyear+1, 7, 14);
+            DateTime assomption = new DateTime(startyear+1, 8, 15);
 
             #endregion 
 
             #region Calculation of Easter Date
 
             // Using of the Algorithm of Butcher-Meeus
-            int n = year2 % 19;
-            int c = year2 / 100;
-            int u = year2 % 100;
+            int n = (startyear+1) % 19;
+            int c = (startyear+1) / 100;
+            int u = (startyear+1) % 100;
             int s = c / 4;
             int t = c % 4;
             int p = (c + 8) / 25;
@@ -53,7 +53,7 @@ namespace OOPGroup4
             int h = (n + 11*e + 22*l) / 451;
             int m = (e + l - 7 * h + 114) / 31;
             int j = (e + l - 7*h + 114) % 31;
-            DateTime easter = new DateTime(year2, m, j + 1);
+            DateTime easter = new DateTime(startyear+1, m, j + 1);
             // this two dates are in function of the easter day
             DateTime ascension = easter.AddDays(40);
             DateTime pentecost = easter.AddDays(49);
@@ -62,77 +62,17 @@ namespace OOPGroup4
 
             #region initilization of a array representing all the date in the Timetable
 
-            int months = 9;
-            int days = 1;
             date = new DateTime[daysInYear];
-            for(int i = 0; i < daysInYear; i++)
+            date[0] = new DateTime(startyear, startmonth, startday);
+            for (int i = 1; i < daysInYear; i++)
             {
-                if(months == 4 || months == 6 || months == 9 || months == 11)
-                {
-                    if(days%31 != 0)
-                    {
-                        date[i] = new DateTime(year, months, days);
-                        days++;
-                    }
-                    else
-                    {
-                        months++;
-                        days = 1;
-                    }
-                }
-                if (months == 1 || months == 3 || months == 5 || months == 7 || months == 8 || months == 10 || months == 12)
-                {
-                    if (days % 32 != 0)
-                    {
-                        date[i] = new DateTime(year, months, days);
-                        days++;
-                    }
-                    else
-                    {
-                        months++;
-                        days = 1;
-                    }
-                }
-                if (months == 2)
-                {
-                    if(daysInYear == 366)
-                    {
-                        if (days % 30 != 0)
-                        {
-                            date[i] = new DateTime(year, months, days);
-                            days++;
-                        }
-                        else
-                        {
-                            months++;
-                            days = 1;
-                        }
-                    }
-                    if (daysInYear == 365)
-                    {
-                        if (days % 29 != 0)
-                        {
-                            date[i] = new DateTime(year, months, days);
-                            days++;
-                        }
-                        else
-                        {
-                            months++;
-                            days = 1;
-                        }
-                    }
-                }
-                if(months == 13)
-                {
-                    months = 1;
-                    year++;
+                date[i] = date[0].AddDays(i);
 
-                }
                 if (DateTime.Compare(date[i], firstNovember) == 0 || DateTime.Compare(date[i], armistice) == 0 || DateTime.Compare(date[i], christmas) == 0 || DateTime.Compare(date[i], newYearsDay) == 0 || DateTime.Compare(date[i], laborDay) == 0 || DateTime.Compare(date[i], secondArmistice) == 0 || DateTime.Compare(date[i], nationalFest) == 0 || DateTime.Compare(date[i], assomption) == 0 || DateTime.Compare(date[i], easter) == 0 || DateTime.Compare(date[i], ascension) == 0 || DateTime.Compare(date[i], pentecost) == 0)
                 {
-                    for(int k = 0; k < timeTable.GetLength(1); k++)
+                    for (int k = 0; k < timeTable.GetLength(1); k++)
                     {
-                        timeTable[i, j] = new Course("HOLIDAY");
+                        timeTable[i, k] = new Course("HOLIDAY", "", "");
                     }
                 }
             }
