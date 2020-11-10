@@ -7,10 +7,10 @@ namespace OOPGroup4
     class Payment
     {
         private string payer_name;
-        private string payment_method;
+        private PaymentMethodEnum payment_method;
         private double amount;
         private DateTime date;
-        public Payment(string payer_name, string payment_method, double amount)
+        public Payment(string payer_name, PaymentMethodEnum payment_method, double amount)
         {
             this.payer_name = payer_name;
             this.payment_method = payment_method;
