@@ -16,5 +16,11 @@ namespace OOPGroup4
         {
 
         }
+        public List<Absence> Absence_list
+        {
+            get { return this.absence_list ; }
+            set { this.absence_list=value ; }
+        }
+       
     }
 }

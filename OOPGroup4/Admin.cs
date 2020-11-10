@@ -2,28 +2,34 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 
 namespace OOPGroup4
 {
     class Admin : Member_of_school
     {
-       
-        //test admin promo 2
+        Promotion promoAdmin;
         public Admin(string place, string school_name, int number_of_student, string id, string name, string surname, string password,
             int age, string sexe, string mail) : base(place, name, id, name, surname, password, age, sexe, mail)
         {
 
+
+            List<Student> listAdminStudentPromo = new List<Student>();
+            List<Faculty_member> listAdminTeacherPromo = new List<Faculty_member>();
+            List<string> ListClassSubject;
+
+            Promotion promoAdmin = new Promotion(listAdminStudentPromo, listAdminTeacherPromo);
         }
 
       
         #region Subject_fonction
         // Créer une nouvellle matière
-        public void NewSubject(List<Course> listSubject, string name)
+        public void NewSubject(List<string> listSubject, string name)
         {
 
         }
         //Changer le nom d'une matière
-        public void ChangeSubjectName(List<Course> listSubject, string newName, string OldName)
+        public void ChangeSubject(List<string> listSubject, string newName, string OldName)
         {
 
         }
@@ -47,12 +53,12 @@ namespace OOPGroup4
         /// <param name="listClasse"></param>
         /// <param name="nomClasse"></param>
         /// <param name="listSubject"></param>
-        public void Add_SubjectToTimetable(string studentID)
+        public void Add_CourseToTimetable(string studentID)
         {
 
         }
         
-        public void Delete_SubjectFromTimetable(string studentID)
+        public void DeleteCourseFromTimetable(string studentID)
         {
 
         }
@@ -60,11 +66,11 @@ namespace OOPGroup4
         //{
 
         //}
-        public void Move_SubjectFromTimetable(string studentID)
+        public void Move_CourseFromTimetable(string studentID)
         {
 
         }
-        public void Modify_SubjectFromTimetable(string studentID)
+        public void Modify_CourseFromTimetable(string studentID)
         {
 
         }
@@ -102,22 +108,44 @@ namespace OOPGroup4
         #region Get_information_fonction
 
         /// <summary>
-        /// Get the name, field of study, name of the class supervised, 
-        /// nb of hours worked per week and the information relative 
+        /// Get the name, field of study, and the information relative 
         /// to the classe Member_of_school
         /// </summary>
         public void GetTeacherFile(string teacherID)
         {
-
+            for (int i=0;i<promoAdmin.ListTeacherPromo.Count;i++)
+            {
+                if(promoAdmin.ListTeacherPromo[i].Id==teacherID)
+                {
+                    Console.WriteLine("Surname:" + promoAdmin.ListTeacherPromo[i].Surname+ " Name:" + promoAdmin.ListTeacherPromo[i].Name 
+                        + "\n Fields of study: " + promoAdmin.ListTeacherPromo[i].Subject
+                        + "\n Age: " + promoAdmin.ListTeacherPromo[i].Age+ " Sexe: "+promoAdmin.ListTeacherPromo[i].Sexe
+                        +"\n email: "+promoAdmin.ListTeacherPromo[i].Mail);
+                }
+            }
+            
         }
         /// <summary>
         /// Get  the information relative to the classe Member_of_school
-        /// in addition of the name of the class, the number of absences and 
+        ///  the number of absences and 
         /// a boolean saying if the student has payed everithing.
         /// </summary>
         public void GetStudentFile(string studentID)
         {
-
+            Student studentObserved;
+         
+            for (int i = 0; i < promoAdmin.ListStudentPromo.Count; i++)
+            {
+                if (promoAdmin.ListStudentPromo[i].Id == studentID)
+                {
+                    studentObserved = promoAdmin.ListStudentPromo[i];
+                    Console.WriteLine("Surname:" + studentObserved.Surname + " Name:" + studentObserved.Name                      
+                        +"\n Age: " + studentObserved.Age + " Sexe: " + studentObserved.Sexe
+                        +"\n email: " + studentObserved.Mail
+                        +"\n Number of absence: "+ NumberOfAbsence(studentObserved)
+                        +"\n The student has payed everything: "+ HasPayedEverything(studentObserved));
+                }
+            }
         }
         /// <summary>
         /// Get the historic of the bills payed, their date and amount.
@@ -158,7 +186,26 @@ namespace OOPGroup4
 
         }
         #endregion
-        
+        #region AboutStudent_fonction
+        static int NumberOfAbsence(Student student)
+        {
+            int counter = 0;
+            
+           for (int i=0;i<student.Absence_list.Count;i++)
+            {
+                if (student.Absence_list[i].Active==true)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+        static bool HasPayedEverything(Student student)
+        {
+           bool checker = true;
+           return checker;
+        }
+        #endregion
 
     }
 }
