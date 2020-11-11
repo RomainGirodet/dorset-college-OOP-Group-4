@@ -16,7 +16,7 @@ namespace OOPGroup4
 
             List<Student> listAdminStudentPromo = new List<Student>();
             List<Faculty_member> listAdminTeacherPromo = new List<Faculty_member>();
-            List<string> ListClassSubject;
+            List<string> listClassSubject=new List<string>();
 
             Promotion promoAdmin = new Promotion(listAdminStudentPromo, listAdminTeacherPromo);
         }
@@ -24,14 +24,37 @@ namespace OOPGroup4
       
         #region Subject_fonction
         // Créer une nouvellle matière
-        public void NewSubject(List<string> listSubject, string name)
+        public void NewSubject(string nameOfTheSubject)
         {
-
+            bool alreadyExist = false;
+            for(int i=0;i<promoAdmin.ListPromoSubject.Count;i++)
+            {
+                if(promoAdmin.ListPromoSubject[i]==nameOfTheSubject)
+                {
+                    alreadyExist = false;
+                }
+            }
         }
         //Changer le nom d'une matière
-        public void ChangeSubject(List<string> listSubject, string newName, string OldName)
+        public void ChangeSubject( string newName, string OldName)
         {
-
+            for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
+            {
+                if (promoAdmin.ListPromoSubject[i] == OldName)
+                {
+                    promoAdmin.ListPromoSubject[i] = newName;
+                }
+            }
+        }
+        public void deleteSubject(string nameOfTheSubject)
+        {
+            for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
+            {
+                if (promoAdmin.ListPromoSubject[i] == nameOfTheSubject)
+                {
+                    promoAdmin.ListPromoSubject.RemoveAt(i);
+                }
+            }
         }
        
         #endregion
@@ -55,6 +78,7 @@ namespace OOPGroup4
         /// <param name="listSubject"></param>
         public void Add_CourseToTimetable(string studentID)
         {
+
 
         }
         
