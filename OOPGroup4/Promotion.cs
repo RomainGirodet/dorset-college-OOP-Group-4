@@ -6,7 +6,7 @@ namespace OOPGroup4
 {
     class Promotion
     {
-        List<Student> listStudentPromo;
+       private List<Student> listStudentPromo;
         List<Faculty_member> listTeacherPromo;
         
         List<string> ListClassSubject;
@@ -20,6 +20,10 @@ namespace OOPGroup4
            
         }
 
+        public List<Student> ListStudentPromo()
+        {
+            return  listStudentPromo;
+        }
 
     }
 }
