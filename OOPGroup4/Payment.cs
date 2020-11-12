@@ -16,5 +16,33 @@ namespace OOPGroup4
             this.payment_method = payment_method;
             this.amount = amount;
         }
+        public string Payer_name
+        {
+            get
+            {
+                return this.payer_name;
+            }
+        }
+        public PaymentMethodEnum Payment_method
+        {
+            get
+            {
+                return this.payment_method;
+            }
+        }
+        public double Amount
+        {
+            get
+            {
+                return this.amount;
+            }
+        }
+        public DateTime Date
+        {
+            get
+            {
+                return this.date;
+            }
+        }
     }
 }
