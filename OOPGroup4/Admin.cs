@@ -124,9 +124,10 @@ namespace OOPGroup4
         /// The admin can then add a comment to justificate the absence.
         /// </summary>
         /// <param name="nameStudent"></param>
-        public void JustifyAnAbsence(string studentID)
+        public void JustifyAnAbsence(string studentID, int absNumber, string comment)
         {
-
+            myStudent[studentID].absence_list[absNumber - 1].active = false;
+            myStudent[studentID].absence_list[absNumber - 1].comments = comment;
         }
         #endregion
         #region Get_information_fonction
