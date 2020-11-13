@@ -12,13 +12,13 @@ namespace OOPGroup4
         public int date; // Date of absence.
         public int timeslot; // Time slot of absence.
         public int time; // Duration of absence in hours.
-        public int active = 1; // allows to know if the absence is effective or not (1 if it is, 0 if not).
+        public bool active = true; // allows to know if the absence is effective or not (true if it is, false if not).
         public string comments; // Optional
 
 
         // Constructeur :
 
-        public Absence(string classes, int date, int timeslot, int time) // Don't need active because it's 1 by default, nether comments because it's optional.
+        public Absence(string classes, int date, int timeslot, int time) // Don't need active because it's true by default, nether comments because it's optional.
         {
             this.classes = classes;
             this.date = date;
@@ -81,7 +81,7 @@ namespace OOPGroup4
             }
         }
 
-        public int Active
+        public bool Active
         {
             get
             {

@@ -2,32 +2,85 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 
 namespace OOPGroup4
 {
     class Admin : Member_of_school
     {
-        //List<string>[,] AdminTimeTable= new List<string>[13,7];
-        
+
+        Promotion promoAdmin;
         public Admin(string place, string school_name, int number_of_student, string id, string name, string surname, string password,
             int age, string sexe, string mail) : base(place, name, id, name, surname, password, age, sexe, mail)
         {
 
+
+            List<Student> listAdminStudentPromo = new List<Student>();
+            List<Faculty_member> listAdminTeacherPromo = new List<Faculty_member>();
+            List<string> listClassSubject=new List<string>();
+
+            Promotion promoAdmin = new Promotion(listAdminStudentPromo, listAdminTeacherPromo);
         }
 
       
         #region Subject_fonction
         // Créer une nouvellle matière
-        public void NewSubject(List<Course> listSubject, string name)
+        public void NewSubject(string nameOfTheSubject)
         {
-
+            bool alreadyExist = false;
+          
+            foreach(string subject in promoAdmin.ListPromoSubject)
+            {
+                if (subject == nameOfTheSubject)
+                {
+                    alreadyExist = true;
+                }
+            }
+            if (alreadyExist==true)
+            {
+                Console.WriteLine("Subject already Exist");
+            }
+            else
+            {
+                promoAdmin.ListPromoSubject.Add(nameOfTheSubject);
+            }
         }
         //Changer le nom d'une matière
-        public void ChangeSubjectName(List<Course> listSubject, string newName, string OldName)
+        public void ChangeSubject( string newName, string OldName)
         {
+            //foreach (string subject in promoAdmin.ListPromoSubject)
+            //{
+            //    if (subject == OldName)
+            //    {
+            //        subject = newName;
+            //    }
+            //}
+            for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
+            {
+                if (promoAdmin.ListPromoSubject[i] == OldName)
+                {
+                    promoAdmin.ListPromoSubject[i] = newName;
+                }
+            }
 
         }
-       
+        public void deleteSubject(string nameOfTheSubject)
+        {
+            //for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
+            //{
+            //    if (promoAdmin.ListPromoSubject[i] == nameOfTheSubject)
+            //    {
+            //        promoAdmin.ListPromoSubject.RemoveAt(i);
+            //    }
+            //}
+            foreach (string subject in promoAdmin.ListPromoSubject)
+            {
+                if (subject == nameOfTheSubject)
+                {
+                    promoAdmin.ListPromoSubject.Remove(subject);
+                }
+            }
+        }
         #endregion
         #region TimeTable_function
         /// <summary>
@@ -47,12 +100,13 @@ namespace OOPGroup4
         /// <param name="listClasse"></param>
         /// <param name="nomClasse"></param>
         /// <param name="listSubject"></param>
-        public void Add_SubjectToTimetable(string studentID)
+        public void Add_CourseToTimetable(string studentID)
         {
+
 
         }
         
-        public void Delete_SubjectFromTimetable(string studentID)
+        public void DeleteCourseFromTimetable(string studentID)
         {
 
         }
@@ -60,31 +114,32 @@ namespace OOPGroup4
         //{
 
         //}
-        public void Move_SubjectFromTimetable(string studentID)
+        public void Move_CourseFromTimetable(string studentID)
         {
 
         }
-        public void Modify_SubjectFromTimetable(string studentID)
+        public void Modify_CourseFromTimetable(string studentID)
         {
 
         }
         #endregion
-        #region Payement_and_Invoice_Function
-        public void CreateInvoice(string studentID)
+        #region Invoice functions
+        public void CreateInvoice(string studentId,string title,double amount,DateTime deadline)
         {
-
+            Invoice invoice = new Invoice(title, amount, deadline);
+            FindStudent(studentId).Invoice_list.Add(invoice);
         }
-        public void MofifyInvoiceDeadline(string studentID)
+        public void MofifyInvoiceDeadline(string student_id,string title,DateTime new_deadline)
         {
-
+            FindStudent(student_id).Invoice_list.Find(x => x.Title == title).Deadline=new_deadline;
         }
-        public void MofifyInvoiceAmount(string studentID)
+        public void MofifyInvoiceAmount(string student_id,string title,double new_amount)
         {
-
+            FindStudent(student_id).Invoice_list.Find(x => x.Title == title).Amount = new_amount;
         }
-        public void MofifyInvoiceName(string studentID)
+        public void MofifyInvoiceName(string student_id,string title,string new_title)
         {
-
+            FindStudent(student_id).Invoice_list.Find(x => x.Title == title).Title = new_title;
         }
 
         #endregion
@@ -94,53 +149,116 @@ namespace OOPGroup4
         /// The admin can then add a comment to justificate the absence.
         /// </summary>
         /// <param name="nameStudent"></param>
-        public void JustifyAnAbsence(string studentID)
+        public void JustifyAnAbsence(string student_id, int absNumber, string comment)
         {
+            Student student = FindStudent(student_id);
 
+            student.Absence_list[absNumber - 1].Active = false;
+            student.Absence_list[absNumber - 1].Comments = comment;
         }
         #endregion
         #region Get_information_fonction
-
         /// <summary>
-        /// Get the name, field of study, name of the class supervised, 
-        /// nb of hours worked per week and the information relative 
+        /// returns the student that corresponds to the id
+        /// </summary>
+        /// <param name="id"></param>
+        public Student FindStudent(string id)
+        {
+            return promoAdmin.ListStudentPromo.Find(x => x.Id == id);
+        }
+        public Faculty_member FindTeacher(string id)
+        {
+            return promoAdmin.ListTeacherPromo.Find(x => x.Id == id);
+        }
+        /// <summary>
+        /// Get the name, field of study, and the information relative 
         /// to the classe Member_of_school
         /// </summary>
-        public void GetTeacherFile(string teacherID)
+        public void GetTeacherFile(string teacher_id)
         {
+            Faculty_member teacher = FindTeacher(teacher_id);
+
+            Console.WriteLine("Surname:" + teacher.Surname + " Name:" + teacher.Name
+                       + "\n Fields of study: " + teacher.Subject
+                       + "\n Age: " + teacher.Age + " Sexe: " + teacher.Sexe
+                       + "\n email: " + teacher.Mail);
 
         }
+
+
         /// <summary>
         /// Get  the information relative to the classe Member_of_school
-        /// in addition of the name of the class, the number of absences and 
-        /// a boolean saying if the student has payed everithing.
+        ///  the number of absences and 
+        /// a boolean saying if the student has payed everything.
         /// </summary>
-        public void GetStudentFile(string studentID)
+        public void GetStudentFile(string student_id)
         {
+            Student student = FindStudent(student_id);
 
+            Console.WriteLine("Surname:" + student.Surname + " Name:" + student.Name
+                        + "\n Age: " + student.Age + " Sexe: " + student.Sexe
+                        + "\n email: " + student.Mail
+                        + "\n Number of absence: " + NumberOfAbsence(student)
+                        + "\n The student has payed everything: " + HasPayedEverything(student_id));
+
+
+
+        }
+
+        /// <summary>
+        /// Displays all the student's payments
+        /// </summary>
+        public void ToStringStudentPayments(string student_id)
+        {
+            foreach(Payment payment in FindStudent(student_id).Payment_list)
+            {
+                Console.WriteLine("Payer's name : " + payment.Payer_name +"\nPayment method : " + payment.Payment_method+ "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString()); 
+            }
         }
         /// <summary>
-        /// Get the historic of the bills payed, their date and amount.
-        /// 
+        /// Displays all the student's payments for a specific invoice
         /// </summary>
-        public void GetStudentBillHistoric(string studentID)
+        public void ToStringStudentSpecificInvoice(string student_id,string invoice_title)
         {
-
+            Invoice invoice = FindStudent(student_id).Invoice_list.Find(x => x.Title == invoice_title);
+            foreach(Payment payment in invoice.Payments)
+            {
+                Console.WriteLine("Payer's name : " + payment.Payer_name + "\nPayment method : " + payment.Payment_method + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString());
+            }
         }
         /// <summary>
-        /// Get the historic of the bills payed linked to a specific invoice with their date and amount.
+        /// Displays all of the student's invoices
         /// </summary>
-        public void GetStudentBillHistoricOfOneInvoice(string studentID)
+        public void GetStudentInvoice(string student_id)
         {
-
+            foreach(Invoice invoice in FindStudent(student_id).Invoice_list)
+            {
+                Console.WriteLine("Title : " + invoice.Title + "\nAmount : " + invoice.Amount+"\nDeadline : "+invoice.Deadline.ToString());
+            }
         }
-        /// <summary>
-        /// Get all the invoice of the student with the amount to pay, the amount already payed and the deadline.
-        /// </summary>
-        public void GetStudentInvoice(string studentID)
+        public bool HasPayedInvoice(string student_id, string invoice_title)
         {
-
+            bool r = false;
+            Invoice invoice = FindStudent(student_id).Invoice_list.Find(x => x.Title == invoice_title);
+            if(FindStudent(student_id).Invoice_list.Find(x => x.Title == invoice_title).Amount_left == 0)
+            {
+                r = true;
+            }
+            return r; 
         }
+        public bool HasPayedEverything(string student_id)
+        {
+            bool r = true;
+            foreach (Invoice invoice in FindStudent(student_id).Invoice_list)
+            {
+                if(invoice.Amount_left != 0)
+                {
+                    r = false;
+                }
+            }
+            return r;
+        }
+
         /// <summary>
         /// Get all the grade of the student sorted by domain with the average in each domain 
         /// Get also the average grade of the student.
@@ -153,12 +271,36 @@ namespace OOPGroup4
         /// Get the historical of the student's absences with their date 
         /// and a comment on their justification.
         /// </summary>
-        public void GetStudentAbsenceHistorical(string studentID)
+        public void GetStudentAbsenceHistorical(string student_id)
         {
+            Student student = FindStudent(student_id);
 
+            for (int i = 0; i < student.Absence_list.Count; i++)
+            {
+                if (student.Absence_list[i].Active == true)
+                {
+                    Console.WriteLine((i + 1) + ") Date: " + student.Absence_list[i].Date + " | Class: " + student.Absence_list[i].Classes + " | Timeslot: " + student.Absence_list[i].Timeslot
+                                + "\n Duration: " + student.Absence_list[i].Time + " | Comments: " + student.Absence_list[i].Comments);
+                }
+            }
         }
         #endregion
+        #region AboutStudent_fonction
+        static int NumberOfAbsence(Student student)
+        {
+            int counter = 0;
+            
+           for (int i=0;i<student.Absence_list.Count;i++)
+            {
+                if (student.Absence_list[i].Active==true)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
         
+        #endregion
 
     }
 }
