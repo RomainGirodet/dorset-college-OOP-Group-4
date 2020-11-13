@@ -6,5 +6,6 @@ namespace OOPGroup4
 {
     class Timetable
     {
+
     }
 }
