@@ -17,9 +17,16 @@ namespace OOPGroup4
         void Pay(string invoice_title,string payer_name, PaymentMethodEnum payment_method, double amount) // verify date < deadline and amount <= amount_left
         {
             Payment payment = new Payment(invoice_title,payer_name, payment_method, amount);
-            payment_list.Add(payment);
-            invoice_list.Find(x => x.Title == invoice_title).Amount_left = invoice_list.Find(x => x.Title == invoice_title).Amount - amount;
-            invoice_list.Find(x => x.Title == invoice_title).Payments.Add(payment);
+            if(invoice_list.Find(x => x.Title == invoice_title).Amount_left >= amount && payment.Date<= invoice_list.Find(x => x.Title == invoice_title).Deadline)
+            {
+                payment_list.Add(payment);
+                invoice_list.Find(x => x.Title == invoice_title).Amount_left = invoice_list.Find(x => x.Title == invoice_title).Amount - amount;
+                invoice_list.Find(x => x.Title == invoice_title).Payments.Add(payment);
+            }
+            else
+            {
+                Console.WriteLine("PAYMENT ERROR");
+            }
         }
 
         public List<Evaluation> StudentEvaluation()
