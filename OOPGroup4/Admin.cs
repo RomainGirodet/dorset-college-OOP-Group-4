@@ -266,7 +266,6 @@ namespace OOPGroup4
             bool checker = true;
             foreach(Invoice invoiceStudent in student.Invoice_list)
             {
-                if(invoiceStudent.)
             }
             return checker;
         }

@@ -9,6 +9,7 @@ namespace OOPGroup4
         // test push
         private string title;
         private double amount;
+        private double amount_left;
         private DateTime deadline;
         private List<Payment> payments;
         public Invoice(string title, double amount, DateTime deadline)
@@ -39,6 +40,18 @@ namespace OOPGroup4
             set
             {
                 this.amount = value;
+            }
+        }
+        public double Amount_left
+        {
+            get
+            {
+                return this.amount_left;
+            }
+
+            set
+            {
+                this.amount_left = value;
             }
         }
         public DateTime Deadline
