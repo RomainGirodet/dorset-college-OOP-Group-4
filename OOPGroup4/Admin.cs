@@ -27,17 +27,33 @@ namespace OOPGroup4
         public void NewSubject(string nameOfTheSubject)
         {
             bool alreadyExist = false;
-            for(int i=0;i<promoAdmin.ListPromoSubject.Count;i++)
+          
+            foreach(string subject in promoAdmin.ListPromoSubject)
             {
-                if(promoAdmin.ListPromoSubject[i]==nameOfTheSubject)
+                if (subject == nameOfTheSubject)
                 {
-                    alreadyExist = false;
+                    alreadyExist = true;
                 }
+            }
+            if (alreadyExist==true)
+            {
+                Console.WriteLine("Subject already Exist");
+            }
+            else
+            {
+                promoAdmin.ListPromoSubject.Add(nameOfTheSubject);
             }
         }
         //Changer le nom d'une matière
         public void ChangeSubject( string newName, string OldName)
         {
+            //foreach (string subject in promoAdmin.ListPromoSubject)
+            //{
+            //    if (subject == OldName)
+            //    {
+            //        subject = newName;
+            //    }
+            //}
             for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
             {
                 if (promoAdmin.ListPromoSubject[i] == OldName)
@@ -45,18 +61,25 @@ namespace OOPGroup4
                     promoAdmin.ListPromoSubject[i] = newName;
                 }
             }
+
         }
         public void deleteSubject(string nameOfTheSubject)
         {
-            for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
+            //for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
+            //{
+            //    if (promoAdmin.ListPromoSubject[i] == nameOfTheSubject)
+            //    {
+            //        promoAdmin.ListPromoSubject.RemoveAt(i);
+            //    }
+            //}
+            foreach (string subject in promoAdmin.ListPromoSubject)
             {
-                if (promoAdmin.ListPromoSubject[i] == nameOfTheSubject)
+                if (subject == nameOfTheSubject)
                 {
-                    promoAdmin.ListPromoSubject.RemoveAt(i);
+                    promoAdmin.ListPromoSubject.Remove(subject);
                 }
             }
         }
-       
         #endregion
         #region TimeTable_function
         /// <summary>
@@ -128,8 +151,8 @@ namespace OOPGroup4
         /// <param name="nameStudent"></param>
         public void JustifyAnAbsence(string studentID, int absNumber, string comment)
         {
-            myStudent[studentID].absence_list[absNumber - 1].active = false;
-            myStudent[studentID].absence_list[absNumber - 1].comments = comment;
+            //myStudent[studentID].absence_list[absNumber - 1].active = false;
+            //myStudent[studentID].absence_list[absNumber - 1].comments = comment;
         }
         #endregion
         #region Get_information_fonction
@@ -141,25 +164,26 @@ namespace OOPGroup4
         {
             return promoAdmin.ListStudentPromo.Find(x => x.Id == id);
         }
-
+        public Faculty_member FindTeacher(string id)
+        {
+            return promoAdmin.ListTeacherPromo.Find(x => x.Id == id);
+        }
         /// <summary>
         /// Get the name, field of study, and the information relative 
         /// to the classe Member_of_school
         /// </summary>
         public void GetTeacherFile(string teacherID)
         {
-            for (int i=0;i<promoAdmin.ListTeacherPromo.Count;i++)
-            {
-                if(promoAdmin.ListTeacherPromo[i].Id==teacherID)
-                {
-                    Console.WriteLine("Surname:" + promoAdmin.ListTeacherPromo[i].Surname+ " Name:" + promoAdmin.ListTeacherPromo[i].Name 
-                        + "\n Fields of study: " + promoAdmin.ListTeacherPromo[i].Subject
-                        + "\n Age: " + promoAdmin.ListTeacherPromo[i].Age+ " Sexe: "+promoAdmin.ListTeacherPromo[i].Sexe
-                        +"\n email: "+promoAdmin.ListTeacherPromo[i].Mail);
-                }
-            }
-            
+            Faculty_member teacher = FindTeacher(teacherID);
+
+            Console.WriteLine("Surname:" + teacher.Surname + " Name:" + teacher.Name
+                       + "\n Fields of study: " + teacher.Subject
+                       + "\n Age: " + teacher.Age + " Sexe: " + teacher.Sexe
+                       + "\n email: " + teacher.Mail);
+
         }
+
+
         /// <summary>
         /// Get  the information relative to the classe Member_of_school
         ///  the number of absences and 
@@ -167,21 +191,17 @@ namespace OOPGroup4
         /// </summary>
         public void GetStudentFile(string studentID)
         {
-            Student student;
-   
-            for (int i = 0; i < promoAdmin.ListStudentPromo.Count; i++)
-            {
-                if (promoAdmin.ListStudentPromo[i].Id == studentID)
-                {
-                    student = promoAdmin.ListStudentPromo[i];
-                    Console.WriteLine("Surname:" + student.Surname + " Name:" + student.Name                      
-                        +"\n Age: " + student.Age + " Sexe: " + student.Sexe
-                        +"\n email: " + student.Mail
-                        +"\n Number of absence: "+ NumberOfAbsence(student)
-                        +"\n The student has payed everything: "+ HasPayedEverything(student));
-                }
-            }
+            Student student = FindStudent(studentID);
+
+            Console.WriteLine("Surname:" + student.Surname + " Name:" + student.Name
+                        + "\n Age: " + student.Age + " Sexe: " + student.Sexe
+                        + "\n email: " + student.Mail
+                        + "\n Number of absence: " + NumberOfAbsence(student)
+                        + "\n The student has payed everything: " + HasPayedEverything(student));
+
+
         }
+
         /// <summary>
         /// Displays all the student's payments
         /// </summary>
