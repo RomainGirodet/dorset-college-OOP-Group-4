@@ -6,6 +6,7 @@ namespace OOPGroup4
 {
     class Payment
     {
+        //Fusion Payement_2 et Admin_promo_2
         private string invoice_title;
         private string payer_name;
         private PaymentMethodEnum payment_method;
