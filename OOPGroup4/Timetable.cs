@@ -9,7 +9,7 @@ namespace OOPGroup4
     {
         public Course[,] timeTable; //Matrix representing the Timetable on 1 year
         public DateTime[] date; // Array representing all the days used in Timetable
-         
+          
         /// <summary>
         /// Function which creates a new Timetable for a person 
         /// </summary>
