@@ -216,19 +216,25 @@ namespace OOPGroup4
         public bool HasPayedInvoice(string student_id, string invoice_title)
         {
             bool r = false;
-            double c = 0;
             Invoice invoice = FindStudent(student_id).Invoice_list.Find(x => x.Title == invoice_title);
-            foreach (Payment payment in invoice.Payments)
-            {
-                c += payment.Amount;
-            }
-            if (c >= invoice.Amount) // if the user can overpay 
+            if(FindStudent(student_id).Invoice_list.Find(x => x.Title == invoice_title).Amount_left == 0)
             {
                 r = true;
             }
-            return r; // works but should be done inside the class with a what's left to pay
+            return r; 
         }
-        
+        public bool HasPayedEverything(string student_id)
+        {
+            bool r = true;
+            foreach (Invoice invoice in FindStudent(student_id).Invoice_list)
+            {
+                if(invoice.Amount_left != 0)
+                {
+                    r = false;
+                }
+            }
+            return r;
+        }
 
         /// <summary>
         /// Get all the grade of the student sorted by domain with the average in each domain 
@@ -261,14 +267,7 @@ namespace OOPGroup4
             }
             return counter;
         }
-        public bool HasPayedEverything(Student student)
-        {
-            bool checker = true;
-            foreach(Invoice invoiceStudent in student.Invoice_list)
-            {
-            }
-            return checker;
-        }
+        
         #endregion
 
     }

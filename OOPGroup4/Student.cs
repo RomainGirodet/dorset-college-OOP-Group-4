@@ -14,7 +14,7 @@ namespace OOPGroup4
         {
 
         }
-        void Pay(string invoice_title,string payer_name, PaymentMethodEnum payment_method, double amount) // verify date < deadline and amount <= amount_left
+        void Pay(string invoice_title,string payer_name, PaymentMethodEnum payment_method, double amount) 
         {
             Payment payment = new Payment(invoice_title,payer_name, payment_method, amount);
             if(invoice_list.Find(x => x.Title == invoice_title).Amount_left >= amount && payment.Date<= invoice_list.Find(x => x.Title == invoice_title).Deadline)
