@@ -127,7 +127,6 @@ namespace OOPGroup4
         {
             Invoice invoice = new Invoice(title, amount, deadline);
             FindStudent(studentId).Invoice_list.Add(invoice);
-            // option to add invoice to several students ?
         }
         public void MofifyInvoiceDeadline(string student_id,string title,DateTime new_deadline)
         {
@@ -172,9 +171,9 @@ namespace OOPGroup4
         /// Get the name, field of study, and the information relative 
         /// to the classe Member_of_school
         /// </summary>
-        public void GetTeacherFile(string teacherID)
+        public void GetTeacherFile(string teacher_id)
         {
-            Faculty_member teacher = FindTeacher(teacherID);
+            Faculty_member teacher = FindTeacher(teacher_id);
 
             Console.WriteLine("Surname:" + teacher.Surname + " Name:" + teacher.Name
                        + "\n Fields of study: " + teacher.Subject
@@ -189,15 +188,15 @@ namespace OOPGroup4
         ///  the number of absences and 
         /// a boolean saying if the student has payed everything.
         /// </summary>
-        public void GetStudentFile(string studentID)
+        public void GetStudentFile(string student_id)
         {
-            Student student = FindStudent(studentID);
+            Student student = FindStudent(student_id);
 
             Console.WriteLine("Surname:" + student.Surname + " Name:" + student.Name
                         + "\n Age: " + student.Age + " Sexe: " + student.Sexe
                         + "\n email: " + student.Mail
                         + "\n Number of absence: " + NumberOfAbsence(student)
-                        + "\n The student has payed everything: " + HasPayedEverything(student));
+                        + "\n The student has payed everything: " + HasPayedEverything(student_id));
 
 
         }
@@ -209,7 +208,7 @@ namespace OOPGroup4
         {
             foreach(Payment payment in FindStudent(student_id).Payment_list)
             {
-                Console.WriteLine("Payer's name : " + payment.Payer_name + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString()); // add enum later
+                Console.WriteLine("Payer's name : " + payment.Payer_name +"\nPayment method : " + payment.Payment_method+ "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString()); 
             }
         }
         /// <summary>
@@ -220,7 +219,7 @@ namespace OOPGroup4
             Invoice invoice = FindStudent(student_id).Invoice_list.Find(x => x.Title == invoice_title);
             foreach(Payment payment in invoice.Payments)
             {
-                Console.WriteLine("Payer's name : " + payment.Payer_name + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString()); // add enum later
+                Console.WriteLine("Payer's name : " + payment.Payer_name + "\nPayment method : " + payment.Payment_method + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString());
             }
         }
         /// <summary>
