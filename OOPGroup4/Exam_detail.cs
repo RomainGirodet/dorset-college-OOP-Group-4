@@ -20,7 +20,7 @@ namespace OOPGroup4
         }
         public double MoyPromo(int id, Promotion a )
         {
-            List<Student> studentPromo = a.ListStudentPromo();
+            List<Student> studentPromo = a.ListStudentPromo;
             double total =0;
             int numberOfStudent =0;
             foreach (Student student in studentPromo)
