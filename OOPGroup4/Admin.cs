@@ -99,7 +99,7 @@ namespace OOPGroup4
 
         }
         #endregion
-        #region Payment and Invoice functions
+        #region Invoice functions
         public void CreateInvoice(string studentId,string title,double amount,DateTime deadline)
         {
             Invoice invoice = new Invoice(title, amount, deadline);
@@ -183,8 +183,7 @@ namespace OOPGroup4
             }
         }
         /// <summary>
-        /// Get the historic of the bills payed, their date and amount.
-        /// 
+        /// Displays all the student's payments
         /// </summary>
         public void GetStudentBillHistoric(string studentID)
         {

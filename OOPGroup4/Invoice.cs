@@ -17,5 +17,53 @@ namespace OOPGroup4
             this.amount = amount;
             this.deadline = deadline;
         }
+        public string Title
+        {
+            get
+            {
+                return this.title;
+            }
+
+            set
+            {
+                this.title = value;
+            }
+        }
+        public double Amount
+        {
+            get
+            {
+                return this.amount;
+            }
+
+            set
+            {
+                this.amount = value;
+            }
+        }
+        public DateTime Deadline
+        {
+            get
+            {
+                return this.deadline;
+            }
+
+            set
+            {
+                this.deadline = value;
+            }
+        }
+        public List<Payment> Payments
+        {
+            get
+            {
+                return payments;
+            }
+
+            set
+            {
+                this.payments = value;
+            }
+        }
     }
 }
