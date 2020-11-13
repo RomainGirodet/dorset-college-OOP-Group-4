@@ -99,22 +99,24 @@ namespace OOPGroup4
 
         }
         #endregion
-        #region Payement_and_Invoice_Function
-        public void CreateInvoice(string studentID)
+        #region Payment and Invoice functions
+        public void CreateInvoice(string studentId,string title,double amount,DateTime deadline)
         {
-
+            Invoice invoice = new Invoice(title, amount, deadline);
+            FindStudent(studentId).Invoice_list.Add(invoice);
+            // option to add invoice to several students ?
         }
-        public void MofifyInvoiceDeadline(string studentID)
+        public void MofifyInvoiceDeadline(string student_id,string title,DateTime new_deadline)
         {
-
+            FindStudent(student_id).Invoice_list.Find(x => x.Title == title).Deadline=new_deadline;
         }
-        public void MofifyInvoiceAmount(string studentID)
+        public void MofifyInvoiceAmount(string student_id,string title,double new_amount)
         {
-
+            FindStudent(student_id).Invoice_list.Find(x => x.Title == title).Amount = new_amount;
         }
-        public void MofifyInvoiceName(string studentID)
+        public void MofifyInvoiceName(string student_id,string title,string new_title)
         {
-
+            FindStudent(student_id).Invoice_list.Find(x => x.Title == title).Title = new_title;
         }
 
         #endregion
@@ -131,6 +133,14 @@ namespace OOPGroup4
         }
         #endregion
         #region Get_information_fonction
+        /// <summary>
+        /// returns the student that corresponds to the id, else returns error
+        /// </summary>
+        /// <param name="id"></param>
+        public Student FindStudent(string id)
+        {
+            return promoAdmin.ListStudentPromo.Find(x => x.Id == id);
+        }
 
         /// <summary>
         /// Get the name, field of study, and the information relative 
@@ -153,22 +163,22 @@ namespace OOPGroup4
         /// <summary>
         /// Get  the information relative to the classe Member_of_school
         ///  the number of absences and 
-        /// a boolean saying if the student has payed everithing.
+        /// a boolean saying if the student has payed everything.
         /// </summary>
         public void GetStudentFile(string studentID)
         {
-            Student studentObserved;
-         
+            Student student;
+   
             for (int i = 0; i < promoAdmin.ListStudentPromo.Count; i++)
             {
                 if (promoAdmin.ListStudentPromo[i].Id == studentID)
                 {
-                    studentObserved = promoAdmin.ListStudentPromo[i];
-                    Console.WriteLine("Surname:" + studentObserved.Surname + " Name:" + studentObserved.Name                      
-                        +"\n Age: " + studentObserved.Age + " Sexe: " + studentObserved.Sexe
-                        +"\n email: " + studentObserved.Mail
-                        +"\n Number of absence: "+ NumberOfAbsence(studentObserved)
-                        +"\n The student has payed everything: "+ HasPayedEverything(studentObserved));
+                    student = promoAdmin.ListStudentPromo[i];
+                    Console.WriteLine("Surname:" + student.Surname + " Name:" + student.Name                      
+                        +"\n Age: " + student.Age + " Sexe: " + student.Sexe
+                        +"\n email: " + student.Mail
+                        +"\n Number of absence: "+ NumberOfAbsence(student)
+                        +"\n The student has payed everything: "+ HasPayedEverything(student));
                 }
             }
         }
