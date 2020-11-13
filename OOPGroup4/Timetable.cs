@@ -15,7 +15,7 @@ namespace OOPGroup4
         /// </summary>
         public void CreateTimetable(int startYear, int startMonth, int startDay)
         {
-            #region Intilization of a matrix representing TmeTable
+            #region Intilization of a matrix representing TimeTable
 
             Calendar calendarBasics = CultureInfo.InvariantCulture.Calendar;
             int daysInYear = calendarBasics.GetDaysInYear(startYear+1); //researched the number of days in year2
@@ -72,7 +72,7 @@ namespace OOPGroup4
                 {
                     for (int k = 0; k < timeTable.GetLength(1); k++)
                     {
-                        timeTable[i, k] = new Course("HOLIDAY", "", "");
+                        timeTable[i, k] = new Course("HOLIDAY");
                     }
                 }
             }
