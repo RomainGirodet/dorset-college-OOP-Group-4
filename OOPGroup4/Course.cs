@@ -6,26 +6,26 @@ namespace OOPGroup4
 {
     class Course
     {
-        public string matter; // matter studied in the course
+        public string topic; // matter studied in the course
         public string professor; // professor ensuring the course
         public string description; // description of the course 
         public List<Student> participant;
 
-        public Course(string matter)
+        public Course(string topic)
         {
-            this.matter = matter;
+            this.topic = topic;
         }
 
-        public Course(string matter, string professor, string description)
+        public Course(string topic, string professor, string description)
         {
-            this.matter = matter;
+            this.topic = topic;
             this.professor = professor;
             this.description = description;
         }
 
-        public Course(string matter, string professor, string description, List<Student> participant)
+        public Course(string topic, string professor, string description, List<Student> participant)
         {
-            this.matter = matter;
+            this.topic = topic;
             this.professor = professor;
             this.description = description;
             this.participant = participant;
