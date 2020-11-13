@@ -15,7 +15,7 @@ namespace OOPGroup4
         {
             this.topic = topic;
         }
-
+         
         public Course(string topic, string professor, string description)
         {
             this.topic = topic;
