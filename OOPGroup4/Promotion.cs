@@ -6,10 +6,10 @@ namespace OOPGroup4
 {
     class Promotion
     {
-        List<Student> listStudentPromo;
+       private List<Student> listStudentPromo;
         List<Faculty_member> listTeacherPromo;
-
-        List<string> listPromoSubject;
+        
+        List<string> ListClassSubject;
 
         public Promotion(List<Student> listStudentPromo,List<Faculty_member> listTeacherPromo)
         {
@@ -19,32 +19,11 @@ namespace OOPGroup4
 
            
         }
-        public Promotion(List<Student> listStudentPromo, List<Faculty_member> listTeacherPromo,List<string> listPromoSubject)
-        {
 
-            this.listStudentPromo = listStudentPromo;
-            this.listTeacherPromo = listTeacherPromo;
-            this.listPromoSubject = listPromoSubject;
-
-        }
-        public List<Faculty_member> ListTeacherPromo
+        public List<Student> ListStudentPromo()
         {
-            get { return this.listTeacherPromo; }
-            set { this.listTeacherPromo = value; }
+            return  listStudentPromo;
         }
-        public List<Student> ListStudentPromo
-        {
-            get { return this.listStudentPromo; }
-            set { this.listStudentPromo = value; }
-        }
-        public List<string> ListPromoSubject
-        {
-            get { return this.listPromoSubject; }
-            set { this.listPromoSubject = value; }
 
-            
-
-        }
     }
-
 }

@@ -8,6 +8,7 @@ namespace OOPGroup4
 {
     class Admin : Member_of_school
     {
+
         Promotion promoAdmin;
         public Admin(string place, string school_name, int number_of_student, string id, string name, string surname, string password,
             int age, string sexe, string mail) : base(place, name, id, name, surname, password, age, sexe, mail)
@@ -148,10 +149,12 @@ namespace OOPGroup4
         /// The admin can then add a comment to justificate the absence.
         /// </summary>
         /// <param name="nameStudent"></param>
-        public void JustifyAnAbsence(string studentID, int absNumber, string comment)
+        public void JustifyAnAbsence(string student_id, int absNumber, string comment)
         {
-            //myStudent[studentID].absence_list[absNumber - 1].active = false;
-            //myStudent[studentID].absence_list[absNumber - 1].comments = comment;
+            Student student = FindStudent(student_id);
+
+            student.Absence_list[absNumber - 1].Active = false;
+            student.Absence_list[absNumber - 1].Comments = comment;
         }
         #endregion
         #region Get_information_fonction
@@ -197,6 +200,7 @@ namespace OOPGroup4
                         + "\n email: " + student.Mail
                         + "\n Number of absence: " + NumberOfAbsence(student)
                         + "\n The student has payed everything: " + HasPayedEverything(student_id));
+
 
 
         }
@@ -267,9 +271,18 @@ namespace OOPGroup4
         /// Get the historical of the student's absences with their date 
         /// and a comment on their justification.
         /// </summary>
-        public void GetStudentAbsenceHistorical(string studentID)
+        public void GetStudentAbsenceHistorical(string student_id)
         {
+            Student student = FindStudent(student_id);
 
+            for (int i = 0; i < student.Absence_list.Count; i++)
+            {
+                if (student.Absence_list[i].Active == true)
+                {
+                    Console.WriteLine((i + 1) + ") Date: " + student.Absence_list[i].Date + " | Class: " + student.Absence_list[i].Classes + " | Timeslot: " + student.Absence_list[i].Timeslot
+                                + "\n Duration: " + student.Absence_list[i].Time + " | Comments: " + student.Absence_list[i].Comments);
+                }
+            }
         }
         #endregion
         #region AboutStudent_fonction
