@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OOPGroup4
 {
@@ -13,9 +14,20 @@ namespace OOPGroup4
     {
         static void Main(string[] args)
         {
-           //test_Push-Romain_Girodet
-           //test fusion 1
-                
+            //test_Push-Romain_Girodet
+            //test fusion 1
+
+            List<Student> listStudentPromoTest=new List<Student>();
+            List<Faculty_member> listTeacherPromoTest=new List<Faculty_member>();
+            List<string> ListClassSubjectTest=new List<string>();
+
+            Promotion promotionTest = new Promotion(listStudentPromoTest, listTeacherPromoTest);
+
+            
+
+            Console.WriteLine("running");
+            Console.ReadKey();
+            
         }
     }
 }

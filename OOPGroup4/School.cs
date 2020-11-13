@@ -8,13 +8,22 @@ namespace OOPGroup4
     {
         string place;
         string school_name;
-        int number_of_student;
+        
 
-        public School(string place, string school_name, int number_of_student)
+        public School(string place, string school_name)
         {
             this.place = place;
             this.school_name = school_name;
-            //this.number_of_student= Propo.ListeEleve.Count
+            
+        }
+
+        public string Place
+        {
+            get { return this.place; }
+        }
+        public string School_name
+        {
+            get { return this.school_name; }
         }
     }
 }
