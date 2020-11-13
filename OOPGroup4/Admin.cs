@@ -134,7 +134,7 @@ namespace OOPGroup4
         #endregion
         #region Get_information_fonction
         /// <summary>
-        /// returns the student that corresponds to the id, else returns error
+        /// returns the student that corresponds to the id
         /// </summary>
         /// <param name="id"></param>
         public Student FindStudent(string id)
@@ -185,24 +185,55 @@ namespace OOPGroup4
         /// <summary>
         /// Displays all the student's payments
         /// </summary>
-        public void GetStudentBillHistoric(string studentID)
+        public void ToStringStudentPayments(string student_id)
         {
-
+            foreach(Payment payment in FindStudent(student_id).Payment_list)
+            {
+                Console.WriteLine("Payer's name : " + payment.Payer_name + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString()); // add enum later
+            }
         }
         /// <summary>
-        /// Get the historic of the bills payed linked to a specific invoice with their date and amount.
+        /// Displays all the student's payments for a specific invoice
         /// </summary>
-        public void GetStudentBillHistoricOfOneInvoice(string studentID)
+        public void ToStringStudentSpecificInvoice(string student_id,string invoice_title)
         {
-
+            Invoice invoice = FindStudent(student_id).Invoice_list.Find(x => x.Title == invoice_title);
+            foreach(Payment payment in invoice.Payments)
+            {
+                Console.WriteLine("Payer's name : " + payment.Payer_name + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString()); // add enum later
+            }
         }
         /// <summary>
-        /// Get all the invoice of the student with the amount to pay, the amount already payed and the deadline.
+        /// Displays all of the student's invoices
         /// </summary>
-        public void GetStudentInvoice(string studentID)
+        public void GetStudentInvoice(string student_id)
         {
-
+            foreach(Invoice invoice in FindStudent(student_id).Invoice_list)
+            {
+                Console.WriteLine("Title : " + invoice.Title + "\nAmount : " + invoice.Amount+"\nDeadline : "+invoice.Deadline.ToString());
+            }
         }
+        public bool HasPayedInvoice(string student_id, string invoice_title)
+        {
+            bool r = false;
+            double c = 0;
+            Invoice invoice = FindStudent(student_id).Invoice_list.Find(x => x.Title == invoice_title);
+            foreach (Payment payment in invoice.Payments)
+            {
+                c += payment.Amount;
+            }
+            if (c >= invoice.Amount) // if the user can overpay 
+            {
+                r = true;
+            }
+            return r; // works but should be done inside the class with a what's left to pay
+        }
+        public bool HasPayedEverything(string student_id)
+        {
+            bool r = false;
+            return r;
+        }
+
         /// <summary>
         /// Get all the grade of the student sorted by domain with the average in each domain 
         /// Get also the average grade of the student.
@@ -234,11 +265,7 @@ namespace OOPGroup4
             }
             return counter;
         }
-        static bool HasPayedEverything(Student student)
-        {
-           bool checker = true;
-           return checker;
-        }
+        
         #endregion
 
     }
