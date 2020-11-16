@@ -7,7 +7,7 @@ namespace OOPGroup4
 {
     class Timetable
     {
-        public Course[,] timeTable; //Matrix representing the Timetable on 1 year
+        public Course[,] courseTable; //Matrix representing the Timetable on 1 year
         public DateTime[] date; // Array representing all the days used in Timetable
           
         /// <summary>
@@ -19,7 +19,7 @@ namespace OOPGroup4
 
             Calendar calendarBasics = CultureInfo.InvariantCulture.Calendar;
             int daysInYear = calendarBasics.GetDaysInYear(startYear+1); //researched the number of days in year2
-            timeTable = new Course[daysInYear, 24]; // timeTable initialization
+            courseTable = new Course[daysInYear, 24]; // timeTable initialization
 
             #endregion
 
@@ -70,14 +70,24 @@ namespace OOPGroup4
 
                 if (DateTime.Compare(date[i], firstNovember) == 0 || DateTime.Compare(date[i], armistice) == 0 || DateTime.Compare(date[i], christmas) == 0 || DateTime.Compare(date[i], newYearsDay) == 0 || DateTime.Compare(date[i], laborDay) == 0 || DateTime.Compare(date[i], secondArmistice) == 0 || DateTime.Compare(date[i], nationalFest) == 0 || DateTime.Compare(date[i], assomption) == 0 || DateTime.Compare(date[i], easter) == 0 || DateTime.Compare(date[i], ascension) == 0 || DateTime.Compare(date[i], pentecost) == 0)
                 {
-                    for (int k = 0; k < timeTable.GetLength(1); k++)
+                    for (int k = 0; k < courseTable.GetLength(1); k++)
                     {
-                        timeTable[i, k] = new Course("HOLIDAY");
+                        courseTable[i, k] = new Course("HOLIDAY");
                     }
                 }
             }
 
             #endregion
+        }
+
+        public Course[,] CourseTable
+        {
+            get { return courseTable; }
+        }
+
+        public DateTime[] Date
+        {
+            get { return date; }
         }
     }
 }
