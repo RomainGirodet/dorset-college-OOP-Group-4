@@ -89,9 +89,63 @@ namespace OOPGroup4
         /// <param name="listClasse"></param>
         /// <param name="nomClasse"></param>
         /// <param name="listSubject"></param>
-        public void CreateTimeTable()
+        public void CreateTimeTable(List<Student> studentList)
         {
+            int startYear = 0;
+            int startMonth = 0;
+            int startDay = 0;
+            int compteur = 0;
+            do
+            {
+                compteur = 0;
+                Console.WriteLine("Which year do you want to start the TimeTable");
+                try
+                {
+                    startYear = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    compteur--;
+                }
 
+                Console.WriteLine("Which month do you want to start the TimeTable");
+                try
+                {
+                    startMonth = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    compteur--;
+                }
+                Console.WriteLine("Which day do you want to start the TimeTable");
+                try
+                {
+                    startDay = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    compteur--;
+                }
+                try
+                {
+                    DateTime dateTest = new DateTime(startYear, startMonth, startDay);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Date impossible");
+
+                    compteur--;
+                }
+
+            } while (compteur < 0);
+
+            foreach (Student student in studentList)
+            {
+                student.Timetable.CreateTimetable(startYear, startMonth, startDay);
+            }
         }
         /// <summary>
         /// Add new subject to the admin's TimeTable wich the student will be able to choose 

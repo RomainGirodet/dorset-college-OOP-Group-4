@@ -10,9 +10,10 @@ namespace OOPGroup4
         private List<Payment> payment_list;
         private List<Absence> absence_list;
         private List<Evaluation> studentEvaluation;
+        private Timetable timetable;
         public Student(string place, string school_name, string id, string name, string surname, string password, int age, string sexe, string mail) : base(place, name, id, name, surname, password, age, sexe, mail)
         {
-
+            
         }
         void Pay(string invoice_title, string payer_name, PaymentMethodEnum payment_method, double amount)
         {
@@ -63,6 +64,11 @@ namespace OOPGroup4
             {
                 this.absence_list = value;
             }
+        }
+
+        public Timetable Timetable
+        {
+            get { return timetable;}
         }
     }
 }
