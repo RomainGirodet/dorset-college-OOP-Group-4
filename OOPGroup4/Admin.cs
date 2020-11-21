@@ -89,15 +89,16 @@ namespace OOPGroup4
         /// <param name="listClasse"></param>
         /// <param name="nomClasse"></param>
         /// <param name="listSubject"></param>
-        public void CreateTimeTable(List<Student> studentList)
+        public void CreateTimeTable(List<Student> studentList, List<Faculty_member> teacherList)
         {
             int startYear = 0;
             int startMonth = 0;
             int startDay = 0;
-            int compteur = 0;
+            int timer = 0;
+            
             do
             {
-                compteur = 0;
+                timer = 0;
                 Console.WriteLine("Which year do you want to start the TimeTable");
                 try
                 {
@@ -106,7 +107,7 @@ namespace OOPGroup4
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-                    compteur--;
+                    timer--;
                 }
 
                 Console.WriteLine("Which month do you want to start the TimeTable");
@@ -117,7 +118,7 @@ namespace OOPGroup4
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-                    compteur--;
+                    timer--;
                 }
                 Console.WriteLine("Which day do you want to start the TimeTable");
                 try
@@ -127,7 +128,7 @@ namespace OOPGroup4
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-                    compteur--;
+                    timer--;
                 }
                 try
                 {
@@ -137,16 +138,108 @@ namespace OOPGroup4
                 {
                     Console.WriteLine("Date impossible");
 
-                    compteur--;
+                    timer--;
                 }
-
-            } while (compteur < 0);
+                if(new DateTime(startYear,startMonth,startDay).DayOfWeek != DayOfWeek.Monday)
+                {
+                    Console.WriteLine("this is not the start of one week");
+                    timer--;
+                }
+            } while (timer < 0);
 
             foreach (Student student in studentList)
             {
                 student.Timetable.CreateTimetable(startYear, startMonth, startDay);
             }
+            foreach (Faculty_member teacher in teacherList)
+            {
+                teacher.Timetable.CreateTimetable(startYear, startMonth, startDay);
+            }
         }
+
+        public void DisplayTimeTable(Student student)
+        {
+            int j = 0;
+            int l = 0;
+            int m = 0;
+            int max = 0;
+            int start = 0;
+            for (int i = 0; i < student.Timetable.Date.Length; i++)
+            {
+
+                if (j == 6 || i == student.Timetable.Date.Length - 1)
+                {
+
+                    Console.WriteLine($"{student.Timetable.Date[i]}");
+                    Console.Write(String.Format("{0,-20} ", student.Timetable.Date[0].DayOfWeek));
+                    m = i % 7;
+                    if (m == 0 && i != student.Timetable.Date.Length - 1)
+                    {
+                        m = 6;
+                    }
+                    for (l = 1; l < m + 1; l++)
+                    {
+                        Console.Write(String.Format("|  {0,-20} ", student.Timetable.Date[l].DayOfWeek));
+                    }
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                    for (l = 0; l < 16; l++)
+                    {
+
+                        Console.Write(String.Format("{0, -20} ", student.Timetable.courseTable[i - 6, l].Topic));
+                        if (i == student.Timetable.Date.Length - 1)
+                        {
+                            start = i + 1;
+                            max = student.Timetable.Date.Length - 1;
+                        }
+                        else
+                        {
+                            start = i - 5;
+                            max = i;
+                        }
+                        for (m = start; m <= max; m++)
+                        {
+                            Console.Write(String.Format("|{0,-22} ", student.Timetable.courseTable[m, l].Topic));
+                        }
+                        Console.WriteLine("|");
+
+
+
+                        Console.Write(String.Format("{0, -20} ", student.Timetable.courseTable[i - 6, l].professor));
+                        for (m = start; m <= max; m++)
+                        {
+                            Console.Write(String.Format("|{0,-22} ", student.Timetable.courseTable[m, l].professor));
+                        }
+                        Console.WriteLine(String.Format("|{0,9} ", l + 7 + ":00"));
+
+
+
+                        Console.Write(String.Format("{0,-20} ", student.Timetable.courseTable[i - 6, l].Description));
+                        for (m = start; m <= max; m++)
+                        {
+                            Console.Write(String.Format("|{0,-22} ", student.Timetable.courseTable[m, l].Description));
+                        }
+                        Console.WriteLine("|");
+
+                        Console.WriteLine("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                    }
+
+                    Console.WriteLine();
+                    j = 0;
+                }
+                else
+                {
+                    Console.Write($"{student.Timetable.Date[i]}  |  ");
+                    j++;
+                }
+
+
+
+            }
+
+        }
+
         /// <summary>
         /// Add new subject to the admin's TimeTable wich the student will be able to choose 
         /// for their own TimeTable.
@@ -159,15 +252,10 @@ namespace OOPGroup4
 
 
         }
-        
         public void DeleteCourseFromTimetable(string studentID)
         {
 
         }
-        //public void Exchange_SubjectFromTimetable(string studentID, List<Course> listSubject)
-        //{
-
-        //}
         public void Move_CourseFromTimetable(string studentID)
         {
 
@@ -228,14 +316,16 @@ namespace OOPGroup4
         /// Get the name, field of study, and the information relative 
         /// to the classe Member_of_school
         /// </summary>
-        public void GetTeacherFile(string teacher_id)
+        public string GetTeacherFile(string teacher_id)
         {
+            string info = "";
             Faculty_member teacher = FindTeacher(teacher_id);
 
-            Console.WriteLine("Surname:" + teacher.Surname + " Name:" + teacher.Name
+            info = ("Surname:" + teacher.Surname + " Name:" + teacher.Name
                        + "\n Fields of study: " + teacher.Subject
                        + "\n Age: " + teacher.Age + " Sexe: " + teacher.Sexe
                        + "\n email: " + teacher.Mail);
+            return info;
 
         }
 
@@ -245,50 +335,55 @@ namespace OOPGroup4
         ///  the number of absences and 
         /// a boolean saying if the student has payed everything.
         /// </summary>
-        public void GetStudentFile(string student_id)
+        public string GetStudentFile(string student_id)
         {
             Student student = FindStudent(student_id);
-
-            Console.WriteLine("Surname:" + student.Surname + " Name:" + student.Name
+            string info = "";
+            info = ("Surname:" + student.Surname + " Name:" + student.Name
                         + "\n Age: " + student.Age + " Sexe: " + student.Sexe
                         + "\n email: " + student.Mail
                         + "\n Number of absence: " + NumberOfAbsence(student)
                         + "\n The student has payed everything: " + HasPayedEverything(student_id));
 
-
-
+            return info;
         }
 
         /// <summary>
         /// Displays all the student's payments
         /// </summary>
-        public void ToStringStudentPayments(string student_id)
+        public string ToStringStudentPayments(string student_id)
         {
-            foreach(Payment payment in FindStudent(student_id).Payment_list)
+            string info = "";
+            foreach (Payment payment in FindStudent(student_id).Payment_list)
             {
-                Console.WriteLine("Payer's name : " + payment.Payer_name +"\nPayment method : " + payment.Payment_method+ "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString()); 
+                info += ("Payer's name : " + payment.Payer_name + "\nPayment method : " + payment.Payment_method + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString());
             }
+            return info;
         }
         /// <summary>
         /// Displays all the student's payments for a specific invoice
         /// </summary>
-        public void ToStringStudentSpecificInvoice(string student_id,string invoice_title)
+        public string ToStringStudentSpecificInvoice(string student_id,string invoice_title)
         {
+            string info = "";
             Invoice invoice = FindStudent(student_id).Invoice_list.Find(x => x.Title == invoice_title);
-            foreach(Payment payment in invoice.Payments)
+            foreach (Payment payment in invoice.Payments)
             {
-                Console.WriteLine("Payer's name : " + payment.Payer_name + "\nPayment method : " + payment.Payment_method + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString());
+                info += ("Payer's name : " + payment.Payer_name + "\nPayment method : " + payment.Payment_method + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString());
             }
+            return info;
         }
         /// <summary>
         /// Displays all of the student's invoices
         /// </summary>
-        public void GetStudentInvoice(string student_id)
+        public string GetStudentInvoice(string student_id)
         {
-            foreach(Invoice invoice in FindStudent(student_id).Invoice_list)
+            string info = "";
+            foreach (Invoice invoice in FindStudent(student_id).Invoice_list)
             {
-                Console.WriteLine("Title : " + invoice.Title + "\nAmount : " + invoice.Amount+"\nDeadline : "+invoice.Deadline.ToString());
+                info += ("Title : " + invoice.Title + "\nAmount : " + invoice.Amount + "\nDeadline : " + invoice.Deadline.ToString());
             }
+            return info;
         }
         public bool HasPayedInvoice(string student_id, string invoice_title)
         {
@@ -325,18 +420,19 @@ namespace OOPGroup4
         /// Get the historical of the student's absences with their date 
         /// and a comment on their justification.
         /// </summary>
-        public void GetStudentAbsenceHistorical(string student_id)
+        public string GetStudentAbsenceHistorical(string student_id)
         {
             Student student = FindStudent(student_id);
-
+            string info = "";
             for (int i = 0; i < student.Absence_list.Count; i++)
             {
                 if (student.Absence_list[i].Active == true)
                 {
-                    Console.WriteLine((i + 1) + ") Date: " + student.Absence_list[i].Date + " | Class: " + student.Absence_list[i].Classes + " | Timeslot: " + student.Absence_list[i].Timeslot
-                                + "\n Duration: " + student.Absence_list[i].Time + " | Comments: " + student.Absence_list[i].Comments);
+                    info += ((i + 1) + ") Date: " + student.Absence_list[i].Date + " | Class: " + student.Absence_list[i].Classes + " | Timeslot: " + student.Absence_list[i].Timeslot
+                                 + "\n Duration: " + student.Absence_list[i].Time + " | Comments: " + student.Absence_list[i].Comments);
                 }
             }
+            return info;
         }
         #endregion
         #region AboutStudent_fonction

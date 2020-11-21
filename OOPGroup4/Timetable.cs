@@ -19,7 +19,7 @@ namespace OOPGroup4
 
             Calendar calendarBasics = CultureInfo.InvariantCulture.Calendar;
             int daysInYear = calendarBasics.GetDaysInYear(startYear+1); //researched the number of days in year2
-            courseTable = new Course[daysInYear, 24]; // timeTable initialization
+            courseTable = new Course[daysInYear, 16]; // timeTable initialization
 
             #endregion
 
@@ -64,10 +64,17 @@ namespace OOPGroup4
 
             date = new DateTime[daysInYear];
             date[0] = new DateTime(startYear, startMonth, startDay);
+            for (int k = 0; k < courseTable.GetLength(1); k++)
+            {
+                courseTable[0, k] = new Course("", "", "");
+            }
             for (int i = 1; i < daysInYear; i++)
             {
                 date[i] = date[0].AddDays(i);
-
+                for (int k = 0; k < courseTable.GetLength(1); k++)
+                {
+                    courseTable[i, k] = new Course("", "", "");
+                }
                 if (DateTime.Compare(date[i], firstNovember) == 0 || DateTime.Compare(date[i], armistice) == 0 || DateTime.Compare(date[i], christmas) == 0 || DateTime.Compare(date[i], newYearsDay) == 0 || DateTime.Compare(date[i], laborDay) == 0 || DateTime.Compare(date[i], secondArmistice) == 0 || DateTime.Compare(date[i], nationalFest) == 0 || DateTime.Compare(date[i], assomption) == 0 || DateTime.Compare(date[i], easter) == 0 || DateTime.Compare(date[i], ascension) == 0 || DateTime.Compare(date[i], pentecost) == 0)
                 {
                     for (int k = 0; k < courseTable.GetLength(1); k++)

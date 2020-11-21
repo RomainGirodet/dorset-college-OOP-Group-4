@@ -9,6 +9,7 @@ namespace OOPGroup4
     {
         private string subject;
         private List<Student> myStudent;
+        private Timetable timetable;
 
         public Faculty_member(string place, string school_name, string id, string name, string surname, string password, int age, string sex, string email, string subject, List<Student> myStudent)
             : base(place, name,id, name, surname, password, age, sex, email)
@@ -32,6 +33,13 @@ namespace OOPGroup4
                 return this.myStudent;
             }
         }
+
+        public Timetable Timetable
+        {
+            get { return timetable; }
+        }
+
+
 
         /// <summary>
         /// put a grade to a student
