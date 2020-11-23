@@ -11,13 +11,15 @@ namespace OOPGroup4
         private List<Student> myStudent;
         private Timetable timetable;
 
-        public Faculty_member(string place, string school_name, string id, string name, string surname, string password, int age, string sex, string email, string subject, List<Student> myStudent)
+        Promotion schoolpromotion;
+        public Faculty_member(string place, string school_name, string id, string name, string surname, string password, int age, string sex, string email, string subject, List<Student> myStudent, Promotion schoolpromotion)
             : base(place, name,id, name, surname, password, age, sex, email)
         {
             this.subject = subject;
             this.myStudent = myStudent;
+            this.schoolpromotion = schoolpromotion;
         }
-
+        #region Property
         public string Subject
         {
             get
@@ -38,33 +40,44 @@ namespace OOPGroup4
         {
             get { return timetable; }
         }
-
-
-
-        /// <summary>
-        /// put a grade to a student
-        /// </summary>
-        /// <param name="student"></param>
-        /// <returns></returns>
-        public int Grade(Student student)
+        #endregion
+        public Student FindStudent(string id)
         {
-            return 1;
+            return schoolpromotion.ListStudentPromo.Find(x => x.Id == id);
+            
         }
 
         /// <summary>
-        /// return true if the student attended class and false if he didn't
+        /// put a grade to a student;
         /// </summary>
         /// <param name="student"></param>
         /// <returns></returns>
-        public bool Assessment(Student student)
+        public void  Grade(string idStudent,  double idEvaluation)
+        {
+            
+        }
+        /// <summary>
+        /// Allows a teacher to put an exam on one of his course.
+        /// </summary>
+        public void CreateAnExam()
+        {
+
+        }
+        /// <summary>
+        /// Allows the teacher to report a missing student, the student receive one absence 
+        /// </summary>
+        /// <param name="student"></param>
+        /// <returns></returns>
+        public bool ReportMissingStudent(string id)
         {
             return true;
         }
 
+
         /// <summary>
-        /// 
+        /// Get infos on a student, the student must be in the list of the teacher 
         /// </summary>
-        public void AccessInfo()
+        public void GetMyStudentInfo()
         {
 
         }

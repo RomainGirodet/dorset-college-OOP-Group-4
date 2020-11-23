@@ -8,18 +8,17 @@ namespace OOPGroup4
 {
     class Admin : Member_of_school
     {
+        List<Student> listAdminStudentPromo = new List<Student>();
+        List<Faculty_member> listAdminTeacherPromo = new List<Faculty_member>();
+        List<string> listClassSubject = new List<string>();
 
         Promotion promoAdmin;
+
         public Admin(string place, string school_name, int number_of_student, string id, string name, string surname, string password,
-            int age, string sexe, string mail) : base(place, name, id, name, surname, password, age, sexe, mail)
+            int age, string sexe, string mail, Promotion promoAdmin) : base(place, name, id, name, surname, password, age, sexe, mail)
         {
 
-
-            List<Student> listAdminStudentPromo = new List<Student>();
-            List<Faculty_member> listAdminTeacherPromo = new List<Faculty_member>();
-            List<string> listClassSubject=new List<string>();
-
-            Promotion promoAdmin = new Promotion(listAdminStudentPromo, listAdminTeacherPromo);
+            this.promoAdmin = promoAdmin;
         }
 
       
