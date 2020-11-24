@@ -255,6 +255,7 @@ namespace OOPGroup4
             int nbhour = 0;
             DateTime day = new DateTime(2000, 01, 01);
             TimeSpan interval;
+
             do
             {
                 timer = 0;
@@ -308,9 +309,11 @@ namespace OOPGroup4
                     timer--;
                 }
             } while (timer < 0);
+
             string topic;
             string professor;
             string description;
+            Faculty_member teacher = new Faculty_member("","","","","","",0,"","","",new List<Student>());
             do
             {
                 Console.WriteLine("Select and write the topic of the course");
@@ -339,15 +342,24 @@ namespace OOPGroup4
                     if (professor == teacherName.TeacherName)
                     {
                         timer = 0;
+                        teacher = teacherName;
                     }
                 }
                 Console.WriteLine("Write a description of the course if not press enter");
                 description = Console.ReadLine();
             } while (timer < 0);
+
             for(int i = starthour - 7; i < starthour - 7 + nbhour; i++)
             {
                 student.Timetable.CourseTable[(int)interval.TotalDays, i] = new Course(topic, professor, description, student);
+                if (teacher.Timetable.CourseTable[(int)interval.TotalDays, i] == new Course("","",""))
+                {
+                    teacher.Timetable.CourseTable[(int)interval.TotalDays, i] = new Course(topic, professor, description);
+                }
+                    
             }
+
+
             string answer;
             do
             {
@@ -367,7 +379,7 @@ namespace OOPGroup4
                     {
                         if(student.Timetable.CourseTable[j, i] == new Course("", "", ""))
                         {
-                            student.Timetable.CourseTable[j, i] = new Course(topic, professor, description, student);
+                            student.Timetable.CourseTable[j, i] = new Course(topic, professor, description);
                         }
                         
                     }
@@ -435,10 +447,25 @@ namespace OOPGroup4
                     timer--;
                 }
             } while (timer < 0);
+            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>());
+
             
+
+
             for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
             {
+                foreach (Faculty_member teacherName in promoAdmin.ListTeacherPromo)
+                {
+                    if (student.Timetable.CourseTable[(int)interval.TotalDays, i].Professor == teacherName.TeacherName)
+                    {
+                        teacher = teacherName;
+                    }
+                }
                 student.Timetable.CourseTable[(int)interval.TotalDays, i] = new Course("","","");
+                if (teacher.Timetable.CourseTable[(int)interval.TotalDays, i] != new Course("", "", ""))
+                {
+                    teacher.Timetable.CourseTable[(int)interval.TotalDays, i] = new Course("","","");
+                }
             }
             string answer;
             do
@@ -458,6 +485,10 @@ namespace OOPGroup4
                     for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
                     {
                         student.Timetable.CourseTable[j, i] = new Course("","","");
+                        if (teacher.Timetable.CourseTable[(int)interval.TotalDays, i] != new Course("", "", ""))
+                        {
+                            teacher.Timetable.CourseTable[(int)interval.TotalDays, i] = new Course("", "", "");
+                        }
                     }
                 }
             }
@@ -528,6 +559,7 @@ namespace OOPGroup4
             int nbhour2 = 0;
             DateTime day2 = new DateTime(2000, 01, 01);
             TimeSpan interval2;
+
             do
             {
                 timer = 0;
@@ -581,6 +613,7 @@ namespace OOPGroup4
                     timer--;
                 }
             } while (timer < 0);
+            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>());
             string topic = "";
             string professor = "";
             string description = "";
@@ -592,12 +625,24 @@ namespace OOPGroup4
 
                 student.Timetable.CourseTable[(int)interval.TotalDays, i] = new Course("","","");
             }
+            
             for (int i = starthour2 - 7; i < starthour2 - 7 + nbhour2; i++)
             {
+                foreach (Faculty_member teacherName in promoAdmin.ListTeacherPromo)
+                {
+                    if (student.Timetable.CourseTable[(int)interval.TotalDays, i].Professor == teacherName.TeacherName)
+                    {
+                        teacher = teacherName;
+                    }
+                }
                 student.Timetable.CourseTable[(int)interval2.TotalDays, i] = new Course(topic, professor, description, student);
+                if (teacher.Timetable.CourseTable[(int)interval2.TotalDays, i] == new Course("", "", ""))
+                {
+                    teacher.Timetable.CourseTable[(int)interval.TotalDays, i] = new Course(topic, professor, description);
+                }
             }
         }
-        public void Modify_Topic_CourseFromTimetable(Student student)
+        public void Modify_Topic_And_Professor_CourseFromTimetable(Student student)
         {
             int timer;
             int starthour = 0;
@@ -660,7 +705,10 @@ namespace OOPGroup4
             } while (timer < 0);
 
             string topic;
-
+            string professor;
+            
+            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>());
+            Faculty_member oldTeacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>());
             do
             {
                 Console.WriteLine("Select and write the new topic of the course");
@@ -677,79 +725,6 @@ namespace OOPGroup4
                         timer = 0;
                     }
                 }
-            } while (timer < 0);
-            for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
-            {
-                student.Timetable.CourseTable[(int)interval.TotalDays, i].Topic = topic;
-            }
-
-        }
-        public void Modify_Professor_CourseFromTimeTable(Student student)
-        {
-            int timer;
-            int starthour = 0;
-            int nbhour = 0;
-            DateTime day = new DateTime(2000, 01, 01);
-            TimeSpan interval;
-            do
-            {
-                timer = 0;
-                Console.WriteLine("Select the day of the course like 01/18/2020");
-                string date = Console.ReadLine().Replace("/", String.Empty);
-                Console.WriteLine(date);
-                try
-                {
-                    day = new DateTime(Convert.ToInt32(date.Substring(4)), Convert.ToInt32(date.Substring(0, 2)), Convert.ToInt32(date.Substring(2, 2)));
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Date impossible");
-                    timer--;
-                }
-
-                Console.WriteLine("Select the hour begin of the course. Write only the hour without minutes as 8 for 8:00");
-                try
-                {
-                    starthour = Convert.ToInt32(Console.ReadLine());
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Hour impossible");
-                    timer--;
-                }
-                if (starthour < 7 || starthour > 22)
-                {
-                    timer--;
-                    Console.WriteLine("This hour is not in the TimeTable");
-                }
-                interval = day - student.Timetable.Date[0];
-                if ((int)interval.TotalDays < 0 || (int)interval.TotalDays > student.Timetable.CourseTable.GetLength(0))
-                {
-                    timer--;
-                    Console.WriteLine("This Date is out of the TimeTable");
-                }
-                else if (student.Timetable.CourseTable[(int)interval.TotalDays, starthour - 7] != new Course("", "", ""))
-                {
-                    timer--;
-                    Console.WriteLine("This slot is already used");
-                }
-                Console.WriteLine("Select the duration of the course with only the number of hour");
-                try
-                {
-                    nbhour = Convert.ToInt32(Console.ReadLine());
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Hour impossible");
-                    timer--;
-                }
-
-            } while (timer < 0);
-
-            string professor;
-
-            do
-            {
                 Console.WriteLine("Select and write the new professor of the course");
                 foreach (Faculty_member teacherName in promoAdmin.ListTeacherPromo)
                 {
@@ -762,13 +737,60 @@ namespace OOPGroup4
                     if (professor == teacherName.TeacherName)
                     {
                         timer = 0;
+                        teacher = teacherName;
                     }
+
                 }
             } while (timer < 0);
+
             for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
             {
+
+                student.Timetable.CourseTable[(int)interval.TotalDays, i].Topic = topic;
                 student.Timetable.CourseTable[(int)interval.TotalDays, i].Professor = professor;
+                if (teacher.Timetable.CourseTable[(int)interval.TotalDays, i] == new Course("", "", ""))
+                {
+                    teacher.Timetable.CourseTable[(int)interval.TotalDays, i] = new Course(topic, professor, student.Timetable.CourseTable[(int)interval.TotalDays, i].Description);
+                }
+                
             }
+
+            string answer;
+            do
+            {
+                Console.WriteLine("Do this action on all participant? yes or no");
+                answer = Console.ReadLine();
+                timer = 0;
+                if (answer != "yes" && answer != "no")
+                {
+                    timer--;
+                }
+
+            } while (timer < 0);
+            if(answer == "yes")
+            {
+                for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
+                {
+                    foreach (Faculty_member teacherName in promoAdmin.ListTeacherPromo)
+                    {
+                        if (student.Timetable.CourseTable[(int)interval.TotalDays, i].Professor == teacherName.TeacherName)
+                        {
+                            oldTeacher = teacherName;
+                        }
+
+                    }
+                    oldTeacher.Timetable.CourseTable[(int)interval.TotalDays, i] = new Course("", "", "");
+
+                    foreach (Student students in student.Timetable.CourseTable[(int)interval.TotalDays, i].Participant)
+                    {
+                        students.Timetable.CourseTable[(int)interval.TotalDays, i].Topic = topic;
+                        students.Timetable.CourseTable[(int)interval.TotalDays, i].Professor = professor;
+                        
+                    }   
+                }
+            }
+
+
         }
         public void Modify_Description_CourseFromTimeTable(Student student)
         {
@@ -832,11 +854,38 @@ namespace OOPGroup4
 
             } while (timer < 0);
 
+            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>());
+
             Console.WriteLine("Write the new description");
             string description = Console.ReadLine();
             for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
             {
                 student.Timetable.CourseTable[(int)interval.TotalDays, i].Description = description;
+            }
+
+
+            string answer;
+            do
+            {
+                Console.WriteLine("Do this action on all participant? yes or no");
+                answer = Console.ReadLine();
+                timer = 0;
+                if (answer != "yes" && answer != "no")
+                {
+                    timer--;
+                }
+
+            } while (timer < 0);
+            if (answer == "yes")
+            {
+                for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
+                {
+                    foreach (Student students in student.Timetable.CourseTable[(int)interval.TotalDays, i].Participant)
+                    {
+                        students.Timetable.CourseTable[(int)interval.TotalDays, i].Description = description;
+                    }
+
+                }
             }
 
         }
