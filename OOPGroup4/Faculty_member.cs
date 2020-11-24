@@ -73,8 +73,10 @@ namespace OOPGroup4
         /// </summary>
         /// <param name="student"></param>
         /// <returns></returns>
-        public bool ReportMissingStudent(string id)
+        public bool ReportMissingStudent(string id, string classes, int date, int timeslot, int time)
         {
+            Absence absence = new Absence(classes, date, timeslot, time);
+            FindStudent(id).Absence_list.Add(absence);
             return true;
         }
 
