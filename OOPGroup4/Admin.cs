@@ -553,8 +553,247 @@ namespace OOPGroup4
                 student.Timetable.CourseTable[(int)interval2.TotalDays, i] = new Course(topic, professor, description, student);
             }
         }
-        public void Modify_CourseFromTimetable(string studentID)
+        public void Modify_Topic_CourseFromTimetable(Student student)
         {
+            int timer;
+            int starthour = 0;
+            int nbhour = 0;
+            DateTime day = new DateTime(2000, 01, 01);
+            TimeSpan interval;
+            do
+            {
+                timer = 0;
+                Console.WriteLine("Select the day of the course like 01/18/2020");
+                string date = Console.ReadLine().Replace("/", String.Empty);
+                Console.WriteLine(date);
+                try
+                {
+                    day = new DateTime(Convert.ToInt32(date.Substring(4)), Convert.ToInt32(date.Substring(0, 2)), Convert.ToInt32(date.Substring(2, 2)));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Date impossible");
+                    timer--;
+                }
+
+                Console.WriteLine("Select the hour begin of the course. Write only the hour without minutes as 8 for 8:00");
+                try
+                {
+                    starthour = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Hour impossible");
+                    timer--;
+                }
+                if (starthour < 7 || starthour > 22)
+                {
+                    timer--;
+                    Console.WriteLine("This hour is not in the TimeTable");
+                }
+                interval = day - student.Timetable.Date[0];
+                if ((int)interval.TotalDays < 0 || (int)interval.TotalDays > student.Timetable.CourseTable.GetLength(0))
+                {
+                    timer--;
+                    Console.WriteLine("This Date is out of the TimeTable");
+                }
+                else if (student.Timetable.CourseTable[(int)interval.TotalDays, starthour - 7] != new Course("", "", ""))
+                {
+                    timer--;
+                    Console.WriteLine("This slot is already used");
+                }
+                Console.WriteLine("Select the duration of the course with only the number of hour");
+                try
+                {
+                    nbhour = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Hour impossible");
+                    timer--;
+                }
+                
+            } while (timer < 0);
+
+            string topic;
+
+            do
+            {
+                Console.WriteLine("Select and write the new topic of the course");
+                foreach (string subject in promoAdmin.ListPromoSubject)
+                {
+                    Console.WriteLine(subject);
+                }
+                topic = Console.ReadLine();
+                timer = -1;
+                foreach (string subject in promoAdmin.ListPromoSubject)
+                {
+                    if (topic == subject)
+                    {
+                        timer = 0;
+                    }
+                }
+            } while (timer < 0);
+            for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
+            {
+                student.Timetable.CourseTable[(int)interval.TotalDays, i].Topic = topic;
+            }
+
+        }
+        public void Modify_Professor_CourseFromTimeTable(Student student)
+        {
+            int timer;
+            int starthour = 0;
+            int nbhour = 0;
+            DateTime day = new DateTime(2000, 01, 01);
+            TimeSpan interval;
+            do
+            {
+                timer = 0;
+                Console.WriteLine("Select the day of the course like 01/18/2020");
+                string date = Console.ReadLine().Replace("/", String.Empty);
+                Console.WriteLine(date);
+                try
+                {
+                    day = new DateTime(Convert.ToInt32(date.Substring(4)), Convert.ToInt32(date.Substring(0, 2)), Convert.ToInt32(date.Substring(2, 2)));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Date impossible");
+                    timer--;
+                }
+
+                Console.WriteLine("Select the hour begin of the course. Write only the hour without minutes as 8 for 8:00");
+                try
+                {
+                    starthour = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Hour impossible");
+                    timer--;
+                }
+                if (starthour < 7 || starthour > 22)
+                {
+                    timer--;
+                    Console.WriteLine("This hour is not in the TimeTable");
+                }
+                interval = day - student.Timetable.Date[0];
+                if ((int)interval.TotalDays < 0 || (int)interval.TotalDays > student.Timetable.CourseTable.GetLength(0))
+                {
+                    timer--;
+                    Console.WriteLine("This Date is out of the TimeTable");
+                }
+                else if (student.Timetable.CourseTable[(int)interval.TotalDays, starthour - 7] != new Course("", "", ""))
+                {
+                    timer--;
+                    Console.WriteLine("This slot is already used");
+                }
+                Console.WriteLine("Select the duration of the course with only the number of hour");
+                try
+                {
+                    nbhour = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Hour impossible");
+                    timer--;
+                }
+
+            } while (timer < 0);
+
+            string professor;
+
+            do
+            {
+                Console.WriteLine("Select and write the new professor of the course");
+                foreach (Faculty_member teacherName in promoAdmin.ListTeacherPromo)
+                {
+                    Console.WriteLine(teacherName.TeacherName);
+                }
+                professor = Console.ReadLine();
+                timer = -1;
+                foreach (Faculty_member teacherName in promoAdmin.ListTeacherPromo)
+                {
+                    if (professor == teacherName.TeacherName)
+                    {
+                        timer = 0;
+                    }
+                }
+            } while (timer < 0);
+            for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
+            {
+                student.Timetable.CourseTable[(int)interval.TotalDays, i].Professor = professor;
+            }
+        }
+        public void Modify_Description_CourseFromTimeTable(Student student)
+        {
+            int timer;
+            int starthour = 0;
+            int nbhour = 0;
+            DateTime day = new DateTime(2000, 01, 01);
+            TimeSpan interval;
+            do
+            {
+                timer = 0;
+                Console.WriteLine("Select the day of the course like 01/18/2020");
+                string date = Console.ReadLine().Replace("/", String.Empty);
+                Console.WriteLine(date);
+                try
+                {
+                    day = new DateTime(Convert.ToInt32(date.Substring(4)), Convert.ToInt32(date.Substring(0, 2)), Convert.ToInt32(date.Substring(2, 2)));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Date impossible");
+                    timer--;
+                }
+
+                Console.WriteLine("Select the hour begin of the course. Write only the hour without minutes as 8 for 8:00");
+                try
+                {
+                    starthour = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Hour impossible");
+                    timer--;
+                }
+                if (starthour < 7 || starthour > 22)
+                {
+                    timer--;
+                    Console.WriteLine("This hour is not in the TimeTable");
+                }
+                interval = day - student.Timetable.Date[0];
+                if ((int)interval.TotalDays < 0 || (int)interval.TotalDays > student.Timetable.CourseTable.GetLength(0))
+                {
+                    timer--;
+                    Console.WriteLine("This Date is out of the TimeTable");
+                }
+                else if (student.Timetable.CourseTable[(int)interval.TotalDays, starthour - 7] != new Course("", "", ""))
+                {
+                    timer--;
+                    Console.WriteLine("This slot is already used");
+                }
+                Console.WriteLine("Select the duration of the course with only the number of hour");
+                try
+                {
+                    nbhour = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Hour impossible");
+                    timer--;
+                }
+
+            } while (timer < 0);
+
+            Console.WriteLine("Write the new description");
+            string description = Console.ReadLine();
+            for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
+            {
+                student.Timetable.CourseTable[(int)interval.TotalDays, i].Description = description;
+            }
 
         }
         #endregion
