@@ -39,6 +39,10 @@ namespace OOPGroup4
             get { return timetable; }
         }
 
+        public string TeacherName
+        {
+            get { return Name; }
+        }
 
 
         /// <summary>

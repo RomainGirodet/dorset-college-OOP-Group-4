@@ -252,8 +252,9 @@ namespace OOPGroup4
             DisplayTimeTable(student);
             int timer;
             int starthour = 0;
-            DateTime day;
-
+            int nbhour = 0;
+            DateTime day = new DateTime(2000, 01, 01);
+            TimeSpan interval;
             do
             {
                 timer = 0;
@@ -269,6 +270,7 @@ namespace OOPGroup4
                     Console.WriteLine("Date impossible");
                     timer--;
                 }
+
                 Console.WriteLine("Select the hour begin of te course. Write only the hour without minutes as 8 for 8:00");
                 try
                 {
@@ -284,7 +286,69 @@ namespace OOPGroup4
                     timer--;
                     Console.WriteLine("This hour is not in the TimeTable");
                 }
+                interval = day - student.Timetable.Date[0];
+                if ((int)interval.TotalDays < 0 || (int)interval.TotalDays > student.Timetable.CourseTable.GetLength(0))
+                {
+                    timer--;
+                    Console.WriteLine("This Date is out of the TimeTable");
+                }
+                else if (student.Timetable.CourseTable[(int)interval.TotalDays, starthour - 7] != new Course("", "", ""))
+                {
+                    timer--;
+                    Console.WriteLine("This slot is already used");
+                }
+                Console.WriteLine("Select the duration of the course with only the number of hour");
+                try
+                {
+                    nbhour = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Hour impossible");
+                    timer--;
+                }
             } while (timer < 0);
+            string topic;
+            string professor;
+            string description;
+            do
+            {
+                Console.WriteLine("Select and write the topic of the course");
+                foreach(string subject in promoAdmin.ListPromoSubject)
+                {
+                    Console.WriteLine(subject);
+                }
+                topic = Console.ReadLine();
+                timer = -1;
+                foreach (string subject in promoAdmin.ListPromoSubject)
+                {
+                    if(topic == subject)
+                    {
+                        timer = 0;
+                    }
+                }
+                Console.WriteLine("Select and write the professor of the course");
+                foreach (Faculty_member teacherName in promoAdmin.ListTeacherPromo)
+                {
+                    Console.WriteLine(teacherName.TeacherName);
+                }
+                professor = Console.ReadLine();
+                timer = -1;
+                foreach (Faculty_member teacherName in promoAdmin.ListTeacherPromo)
+                {
+                    if (professor == teacherName.TeacherName)
+                    {
+                        timer = 0;
+                    }
+                }
+                Console.WriteLine("Write a description of the course if not press enter");
+                description = Console.ReadLine();
+            } while (timer < 0);
+            for(int i = starthour - 7; i < starthour - 7 + nbhour; i++)
+            {
+                student.Timetable.CourseTable[(int)interval.TotalDays, i] = new Course(topic, professor, description, student);
+            }
+            
 
         }
         public void DeleteCourseFromTimetable(string studentID)
