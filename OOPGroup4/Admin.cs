@@ -312,17 +312,17 @@ namespace OOPGroup4
             string topic;
             string professor;
             string description;
-            Faculty_member teacher = new Faculty_member("","","","","","",0,"","","",new List<Student>());
+            Faculty_member teacher = new Faculty_member("","","","","","",0,"","","",new List<Student>(), promoAdmin);
             do
             {
                 Console.WriteLine("Select and write the topic of the course");
-                foreach(string subject in promoAdmin.ListPromoSubject)
+                foreach(string subject in promoAdmin.ListPromoMandatorySubject)
                 {
                     Console.WriteLine(subject);
                 }
                 topic = Console.ReadLine();
                 timer = -1;
-                foreach (string subject in promoAdmin.ListPromoSubject)
+                foreach (string subject in promoAdmin.ListPromoMandatorySubject)
                 {
                     if(topic == subject)
                     {
@@ -446,9 +446,8 @@ namespace OOPGroup4
                     timer--;
                 }
             } while (timer < 0);
-            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>());
+            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>(), promoAdmin);
 
-            
 
 
             for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
@@ -612,8 +611,7 @@ namespace OOPGroup4
                     timer--;
                 }
             } while (timer < 0);
-            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>());
-            string topic = "";
+            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>(), promoAdmin); string topic = "";
             string professor = "";
             string description = "";
             for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
@@ -705,19 +703,19 @@ namespace OOPGroup4
 
             string topic;
             string professor;
-            
-            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>());
-            Faculty_member oldTeacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>());
+
+            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>(), promoAdmin);
+            Faculty_member oldTeacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>(), promoAdmin);
             do
             {
                 Console.WriteLine("Select and write the new topic of the course");
-                foreach (string subject in promoAdmin.ListPromoSubject)
+                foreach (string subject in promoAdmin.ListPromoMandatorySubject)
                 {
                     Console.WriteLine(subject);
                 }
                 topic = Console.ReadLine();
                 timer = -1;
-                foreach (string subject in promoAdmin.ListPromoSubject)
+                foreach (string subject in promoAdmin.ListPromoMandatorySubject)
                 {
                     if (topic == subject)
                     {
@@ -853,8 +851,7 @@ namespace OOPGroup4
 
             } while (timer < 0);
 
-            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>());
-
+            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>(), promoAdmin);
             Console.WriteLine("Write the new description");
             string description = Console.ReadLine();
             for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)

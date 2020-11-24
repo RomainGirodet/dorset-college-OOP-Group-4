@@ -56,6 +56,17 @@ namespace OOPGroup4
             get { return this.listStudentPromo; }
             set { this.listStudentPromo = value; }
         }
+
+        public List<string> ListPromoMandatorySubject
+        {
+            get { return listPromoMandatorySubject; }
+        }
+
+        public List<string> ListPromoOptionalSubject
+        {
+            get { return listPromoOptionalSubject; }
+        }
+
         //public List<string> ListPromoSubject
         //{
         //    get { return this.listPromoSubject; }
