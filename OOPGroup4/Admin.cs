@@ -247,9 +247,44 @@ namespace OOPGroup4
         /// <param name="listClasse"></param>
         /// <param name="nomClasse"></param>
         /// <param name="listSubject"></param>
-        public void Add_CourseToTimetable(string studentID)
+        public void Add_CourseToTimetable(Student student)
         {
+            DisplayTimeTable(student);
+            int timer;
+            int starthour = 0;
+            DateTime day;
 
+            do
+            {
+                timer = 0;
+                Console.WriteLine("Select the day of the course like 01/18/2020");
+                string date = Console.ReadLine().Replace("/", String.Empty);
+                Console.WriteLine(date);
+                try
+                {
+                    day = new DateTime(Convert.ToInt32(date.Substring(4)), Convert.ToInt32(date.Substring(0, 2)), Convert.ToInt32(date.Substring(2, 2)));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Date impossible");
+                    timer--;
+                }
+                Console.WriteLine("Select the hour begin of te course. Write only the hour without minutes as 8 for 8:00");
+                try
+                {
+                    starthour = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Hour impossible");
+                    timer--;
+                }
+                if (starthour < 7 || starthour > 22)
+                {
+                    timer--;
+                    Console.WriteLine("This hour is not in the TimeTable");
+                }
+            } while (timer < 0);
 
         }
         public void DeleteCourseFromTimetable(string studentID)
