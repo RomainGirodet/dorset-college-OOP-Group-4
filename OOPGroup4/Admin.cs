@@ -8,64 +8,63 @@ namespace OOPGroup4
 {
     class Admin : Member_of_school
     {
+        List<Student> listAdminStudentPromo = new List<Student>();
+        List<Faculty_member> listAdminTeacherPromo = new List<Faculty_member>();
+        List<string> listClassSubject = new List<string>();
 
         Promotion promoAdmin;
+
         public Admin(string place, string school_name, int number_of_student, string id, string name, string surname, string password,
-            int age, string sexe, string mail) : base(place, name, id, name, surname, password, age, sexe, mail)
+            int age, string sexe, string mail, Promotion promoAdmin) : base(place, name, id, name, surname, password, age, sexe, mail)
         {
 
-
-            List<Student> listAdminStudentPromo = new List<Student>();
-            List<Faculty_member> listAdminTeacherPromo = new List<Faculty_member>();
-            List<string> listClassSubject=new List<string>();
-
-            Promotion promoAdmin = new Promotion(listAdminStudentPromo, listAdminTeacherPromo);
+            this.promoAdmin = promoAdmin;
         }
 
-      
+
         #region Subject_fonction
         // Créer une nouvellle matière
-        public void NewSubject(string nameOfTheSubject)
-        {
-            bool alreadyExist = false;
-          
-            foreach(string subject in promoAdmin.ListPromoSubject)
-            {
-                if (subject == nameOfTheSubject)
-                {
-                    alreadyExist = true;
-                }
-            }
-            if (alreadyExist==true)
-            {
-                Console.WriteLine("Subject already Exist");
-            }
-            else
-            {
-                promoAdmin.ListPromoSubject.Add(nameOfTheSubject);
-            }
-        }
-        //Changer le nom d'une matière
-        public void ChangeSubject( string newName, string OldName)
-        {
-            //foreach (string subject in promoAdmin.ListPromoSubject)
-            //{
-            //    if (subject == OldName)
-            //    {
-            //        subject = newName;
-            //    }
-            //}
-            for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
-            {
-                if (promoAdmin.ListPromoSubject[i] == OldName)
-                {
-                    promoAdmin.ListPromoSubject[i] = newName;
-                }
-            }
+        //public void NewSubject(string nameOfTheSubject)
+        //{
+        //    bool alreadyExist = false;
 
-        }
-        public void deleteSubject(string nameOfTheSubject)
-        {
+        //    foreach (string subject in promoAdmin.ListPromoSubject)
+        //    {
+        //        if (subject == nameOfTheSubject)
+        //        {
+        //            alreadyExist = true;
+        //        }
+        //    }
+        //    if (alreadyExist == true)
+        //    {
+        //        Console.WriteLine("Subject already Exist");
+        //    }
+        //    else
+        //    {
+        //        promoAdmin.ListPromoSubject.Add(nameOfTheSubject);
+        //    }
+        //}
+        //Changer le nom d'une matière
+        //public void ChangeSubject(string newName, string OldName)
+        //{
+        //    foreach (string subject in promoAdmin.ListPromoSubject)
+        //    {
+        //        if (subject == OldName)
+        //        {
+        //            subject = newName;
+        //        }
+        //    }
+        //    for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
+        //    {
+        //        if (promoAdmin.ListPromoSubject[i] == OldName)
+        //        {
+        //            promoAdmin.ListPromoSubject[i] = newName;
+        //        }
+        //    }
+
+        //}
+        //public void deleteSubject(string nameOfTheSubject)
+        //{
             //for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
             //{
             //    if (promoAdmin.ListPromoSubject[i] == nameOfTheSubject)
@@ -73,14 +72,14 @@ namespace OOPGroup4
             //        promoAdmin.ListPromoSubject.RemoveAt(i);
             //    }
             //}
-            foreach (string subject in promoAdmin.ListPromoSubject)
-            {
-                if (subject == nameOfTheSubject)
-                {
-                    promoAdmin.ListPromoSubject.Remove(subject);
-                }
-            }
-        }
+        //    foreach (string subject in promoAdmin.ListPromoSubject)
+        //    {
+        //        if (subject == nameOfTheSubject)
+        //        {
+        //            promoAdmin.ListPromoSubject.Remove(subject);
+        //        }
+        //    }
+        //}
         #endregion
         #region TimeTable_function
         /// <summary>
