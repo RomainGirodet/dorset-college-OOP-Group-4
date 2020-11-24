@@ -41,9 +41,14 @@ namespace OOPGroup4
             get { return timetable; }
         }
         #endregion
+        #region fonction
+       
+
+
+
         public Student FindStudent(string id)
         {
-            return schoolpromotion.ListStudentPromo.Find(x => x.Id == id);
+            return MyStudent.Find(x => x.Id == id);
             
         }
 
@@ -77,9 +82,31 @@ namespace OOPGroup4
         /// <summary>
         /// Get infos on a student, the student must be in the list of the teacher 
         /// </summary>
-        public void GetMyStudentInfo()
+        public string  GetMyStudentInfo(string student_id)
         {
+            Student student = FindStudent(student_id);
+            string info = "";
+            info = ("Surname:" + student.Surname + " Name:" + student.Name
+                        + "\n Age: " + student.Age + " Sexe: " + student.Sexe
+                        + "\n email: " + student.Mail
+                        + "\n Number of absence: " + NumberOfAbsence(student));
+                        
 
+            return info;
+        }
+        static int NumberOfAbsence(Student student)
+        {
+            int counter = 0;
+
+            for (int i = 0; i < student.Absence_list.Count; i++)
+            {
+                if (student.Absence_list[i].Active == true)
+                {
+                    counter++;
+                }
+            }
+            return counter;
         }
     }
+    #endregion
 }

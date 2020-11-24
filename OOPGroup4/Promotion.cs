@@ -9,7 +9,8 @@ namespace OOPGroup4
         public List<Student> listStudentPromo;
         List<Faculty_member> listTeacherPromo;
 
-        List<string> listPromoSubject;
+        List<string> listPromoMandatorySubject= new List<string>();
+        List<string> listPromoOptionalSubject=new List<string>();
 
         public Promotion(List<Student> listStudentPromo, List<Faculty_member> listTeacherPromo)
         {
@@ -17,16 +18,34 @@ namespace OOPGroup4
             this.listStudentPromo = listStudentPromo;
             this.listTeacherPromo = listTeacherPromo;
 
+            listPromoMandatorySubject.Add("Fluid Mechanics");
+            listPromoMandatorySubject.Add("Data Structure & Algorithm");
+            listPromoMandatorySubject.Add("Numerical Analysis ");
+            listPromoMandatorySubject.Add("Statistical Inference");
+            listPromoMandatorySubject.Add("Object-Oriented Programming");
+
+            listPromoOptionalSubject.Add("Napoleon's History");
+            listPromoOptionalSubject.Add("Sewing");
+            listPromoOptionalSubject.Add("HTML & CSS");
+            listPromoOptionalSubject.Add("Philosophy");
+            listPromoOptionalSubject.Add("SolidWorks");
+            listPromoOptionalSubject.Add("Rhetoric");
+            listPromoOptionalSubject.Add("Cooking");
+            listPromoOptionalSubject.Add("Military preparation");
+           
+                
+
+
 
         }
-        public Promotion(List<Student> listStudentPromo, List<Faculty_member> listTeacherPromo, List<string> listPromoSubject)
-        {
+        //public Promotion(List<Student> listStudentPromo, List<Faculty_member> listTeacherPromo, List<string> listPromoSubject)
+        //{
 
-            this.listStudentPromo = listStudentPromo;
-            this.listTeacherPromo = listTeacherPromo;
-            this.listPromoSubject = listPromoSubject;
+        //    this.listStudentPromo = listStudentPromo;
+        //    this.listTeacherPromo = listTeacherPromo;
+        //    this.listPromoSubject = listPromoSubject;
 
-        }
+        //}
         public List<Faculty_member> ListTeacherPromo
         {
             get { return this.listTeacherPromo; }
@@ -37,13 +56,12 @@ namespace OOPGroup4
             get { return this.listStudentPromo; }
             set { this.listStudentPromo = value; }
         }
-        public List<string> ListPromoSubject
-        {
-            get { return this.listPromoSubject; }
-            set { this.listPromoSubject = value; }
+        //public List<string> ListPromoSubject
+        //{
+        //    get { return this.listPromoSubject; }
+        //    set { this.listPromoSubject = value; }
 
 
-
-        }
+        //}
     }
 }

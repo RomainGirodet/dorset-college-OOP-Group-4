@@ -21,50 +21,50 @@ namespace OOPGroup4
             this.promoAdmin = promoAdmin;
         }
 
-      
+
         #region Subject_fonction
         // Créer une nouvellle matière
-        public void NewSubject(string nameOfTheSubject)
-        {
-            bool alreadyExist = false;
-          
-            foreach(string subject in promoAdmin.ListPromoSubject)
-            {
-                if (subject == nameOfTheSubject)
-                {
-                    alreadyExist = true;
-                }
-            }
-            if (alreadyExist==true)
-            {
-                Console.WriteLine("Subject already Exist");
-            }
-            else
-            {
-                promoAdmin.ListPromoSubject.Add(nameOfTheSubject);
-            }
-        }
-        //Changer le nom d'une matière
-        public void ChangeSubject( string newName, string OldName)
-        {
-            //foreach (string subject in promoAdmin.ListPromoSubject)
-            //{
-            //    if (subject == OldName)
-            //    {
-            //        subject = newName;
-            //    }
-            //}
-            for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
-            {
-                if (promoAdmin.ListPromoSubject[i] == OldName)
-                {
-                    promoAdmin.ListPromoSubject[i] = newName;
-                }
-            }
+        //public void NewSubject(string nameOfTheSubject)
+        //{
+        //    bool alreadyExist = false;
 
-        }
-        public void deleteSubject(string nameOfTheSubject)
-        {
+        //    foreach (string subject in promoAdmin.ListPromoSubject)
+        //    {
+        //        if (subject == nameOfTheSubject)
+        //        {
+        //            alreadyExist = true;
+        //        }
+        //    }
+        //    if (alreadyExist == true)
+        //    {
+        //        Console.WriteLine("Subject already Exist");
+        //    }
+        //    else
+        //    {
+        //        promoAdmin.ListPromoSubject.Add(nameOfTheSubject);
+        //    }
+        //}
+        //Changer le nom d'une matière
+        //public void ChangeSubject(string newName, string OldName)
+        //{
+        //    foreach (string subject in promoAdmin.ListPromoSubject)
+        //    {
+        //        if (subject == OldName)
+        //        {
+        //            subject = newName;
+        //        }
+        //    }
+        //    for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
+        //    {
+        //        if (promoAdmin.ListPromoSubject[i] == OldName)
+        //        {
+        //            promoAdmin.ListPromoSubject[i] = newName;
+        //        }
+        //    }
+
+        //}
+        //public void deleteSubject(string nameOfTheSubject)
+        //{
             //for (int i = 0; i < promoAdmin.ListPromoSubject.Count; i++)
             //{
             //    if (promoAdmin.ListPromoSubject[i] == nameOfTheSubject)
@@ -72,14 +72,14 @@ namespace OOPGroup4
             //        promoAdmin.ListPromoSubject.RemoveAt(i);
             //    }
             //}
-            foreach (string subject in promoAdmin.ListPromoSubject)
-            {
-                if (subject == nameOfTheSubject)
-                {
-                    promoAdmin.ListPromoSubject.Remove(subject);
-                }
-            }
-        }
+        //    foreach (string subject in promoAdmin.ListPromoSubject)
+        //    {
+        //        if (subject == nameOfTheSubject)
+        //        {
+        //            promoAdmin.ListPromoSubject.Remove(subject);
+        //        }
+        //    }
+        //}
         #endregion
         #region TimeTable_function
         /// <summary>
