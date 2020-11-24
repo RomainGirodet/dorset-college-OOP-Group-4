@@ -43,7 +43,7 @@ namespace OOPGroup4
         //    {
         //        promoAdmin.ListPromoSubject.Add(nameOfTheSubject);
         //    }
-        //}
+        //} 
         //Changer le nom d'une matière
         //public void ChangeSubject(string newName, string OldName)
         //{
