@@ -348,8 +348,31 @@ namespace OOPGroup4
             {
                 student.Timetable.CourseTable[(int)interval.TotalDays, i] = new Course(topic, professor, description, student);
             }
+            string answer;
+            do
+            {
+                Console.WriteLine("If you want to repeat it each week write yes, if not write no");
+                answer = Console.ReadLine();
+                if(answer != "yes" && answer != "no")
+                {
+                    timer--;
+                }
+            } while (timer < 0);
             
-
+            if(answer == "yes")
+            {
+                for(int j = (int)interval.TotalDays; j < student.Timetable.CourseTable.GetLength(0); j = +7)
+                {
+                    for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
+                    {
+                        if(student.Timetable.CourseTable[j, i] == new Course("", "", ""))
+                        {
+                            student.Timetable.CourseTable[j, i] = new Course(topic, professor, description, student);
+                        }
+                        
+                    }
+                }
+            }
         }
         public void DeleteCourseFromTimetable(Student student)
         {
@@ -416,6 +439,27 @@ namespace OOPGroup4
             for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
             {
                 student.Timetable.CourseTable[(int)interval.TotalDays, i] = new Course("","","");
+            }
+            string answer;
+            do
+            {
+                Console.WriteLine("If you want to repeat it each week write yes, if not write no");
+                answer = Console.ReadLine();
+                if (answer != "yes" && answer != "no")
+                {
+                    timer--;
+                }
+            } while (timer < 0);
+
+            if (answer == "yes")
+            {
+                for (int j = (int)interval.TotalDays; j < student.Timetable.CourseTable.GetLength(0); j = +7)
+                {
+                    for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
+                    {
+                        student.Timetable.CourseTable[j, i] = new Course("","","");
+                    }
+                }
             }
         }
         public void Move_CourseFromTimetable(Student student)
