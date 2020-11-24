@@ -12,8 +12,9 @@ namespace OOPGroup4
         private Timetable timetable;
 
         Promotion schoolpromotion;
-        public Faculty_member(string place, string school_name, string id, string name, string surname, string password, int age, string sex, string email, string subject, List<Student> myStudent, Promotion schoolpromotion)
-            : base(place, name,id, name, surname, password, age, sex, email)
+        public Faculty_member(string id, string first_name, string last_name, string password,
+            string date_of_birth, string gender, string mail, string subject, List<Student> myStudent, Promotion schoolpromotion)
+            : base(id, first_name, last_name, password, date_of_birth, gender, mail)
         {
             this.subject = subject;
             this.myStudent = myStudent;
@@ -47,7 +48,7 @@ namespace OOPGroup4
 
         public string TeacherName
         {
-            get { return Name; }
+            get { return First_name; }
         }
 
         public Student FindStudent(string id)
@@ -59,7 +60,7 @@ namespace OOPGroup4
         /// <summary>
         /// put a grade to a student;
         /// </summary>
-        /// <param name="student"></param>
+        /// <param first_name="student"></param>
         /// <returns></returns>
         public void  Grade(string idStudent,  double idEvaluation)
         {
@@ -75,7 +76,7 @@ namespace OOPGroup4
         /// <summary>
         /// Allows the teacher to report a missing student, the student receive one absence 
         /// </summary>
-        /// <param name="student"></param>
+        /// <param first_name="student"></param>
         /// <returns></returns>
         public bool ReportMissingStudent(string id, string classes, int date, int timeslot, int time)
         {
@@ -92,8 +93,8 @@ namespace OOPGroup4
         {
             Student student = FindStudent(student_id);
             string info = "";
-            info = ("Surname:" + student.Surname + " Name:" + student.Name
-                        + "\n Age: " + student.Age + " Sexe: " + student.Sexe
+            info = ("Last_name:" + student.Last_name + " First_name:" + student.First_name
+                        + "\n Date_of_birth: " + student.Date_of_birth + " Gender: " + student.Gender
                         + "\n email: " + student.Mail
                         + "\n Number of absence: " + NumberOfAbsence(student));
                         

@@ -44,19 +44,19 @@ namespace OOPGroup4
             //    string place = columns[0];
             //    string school_name = columns[1];
             //    string id = columns[2];
-            //    string name = columns[3];
-            //    string surname = columns[4];
+            //    string first_name = columns[3];
+            //    string last_name = columns[4];
             //    string password = columns[5];
-            //    int age = Convert.ToInt32(columns[6]);
-            //    string sexe = columns[7];
+            //    int date_of_birth = Convert.ToInt32(columns[6]);
+            //    string gender = columns[7];
             //    string mail = columns[8];
-            //    promotionTest.listStudentPromo.Add(new Student(place, school_name, id, name, surname, password, age, sexe, mail));
+            //    promotionTest.listStudentPromo.Add(new Student(place, school_name, id, first_name, last_name, password, date_of_birth, gender, mail));
             //}
             //Console.ReadKey();
             //Console.WriteLine(" student affichage  ");
             //foreach (Student a in listStudentPromoTest)
             //{
-            //    Console.WriteLine(a.Name + "   " + a.Password);
+            //    Console.WriteLine(a.First_name + "   " + a.Password);
             //}
             Console.ReadKey();
         }

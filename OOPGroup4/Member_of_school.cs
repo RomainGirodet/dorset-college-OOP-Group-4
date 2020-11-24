@@ -4,50 +4,50 @@ using System.Text;
 
 namespace OOPGroup4
 {
-    class Member_of_school : School
+    class Member_of_school 
     {
         string id;
-        string name;
-        string surname;
+        string first_name;
+        string last_name;
         string password;
-        int age;
-        string sexe;
+        string  date_of_birth;
+        string gender;
         string mail;
 
-        public  Member_of_school(string place, string school_name,string id,string name, string surname,string password, 
-            int age, string sexe, string mail ) : base( place,  name )
+        public  Member_of_school(string id,string first_name, string last_name,string password, 
+            string  date_of_birth, string gender, string mail ) 
         {
             this.id = id;
-            this.name = name;
-            this.surname = surname;
+            this.first_name = first_name;
+            this.last_name = last_name;
             this.password = password;
-            this.age = age;
-            this.sexe = sexe;
+            this.date_of_birth = date_of_birth;
+            this.gender = gender;
             this.mail = mail;
         }
         public string Id
         {
             get { return this.id; }
         }
-        public string Name
+        public string First_name
         {
-            get { return this.name; }
+            get { return this.first_name; }
         }
-        public string Surname
+        public string Last_name
         {
-            get { return this.surname; }
+            get { return this.last_name; }
         }
         public string Password
         {
             get { return this.password; }
         }
-        public int Age
+        public string  Date_of_birth
         {
-            get { return this.age; }
+            get { return this.date_of_birth; }
         }
-        public string Sexe
+        public string Gender
         {
-            get { return this.sexe; }
+            get { return this.gender; }
         }
         public string Mail
         {

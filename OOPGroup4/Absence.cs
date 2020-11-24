@@ -8,7 +8,7 @@ namespace OOPGroup4
     {
         // Champs :
 
-        public string classes; // Name of classes.
+        public string classes; // First_name of classes.
         public int date; // Date of absence.
         public int timeslot; // Time slot of absence.
         public int time; // Duration of absence in hours.

@@ -14,8 +14,8 @@ namespace OOPGroup4
 
         Promotion promoAdmin;
 
-        public Admin(string place, string school_name, int number_of_student, string id, string name, string surname, string password,
-            int age, string sexe, string mail, Promotion promoAdmin) : base(place, name, id, name, surname, password, age, sexe, mail)
+        public Admin(string id, string first_name, string last_name, string password,
+            string date_of_birth, string gender, string mail, Promotion promoAdmin) : base ( id, first_name, last_name, password, date_of_birth, gender, mail)
         {
 
             this.promoAdmin = promoAdmin;
@@ -85,9 +85,9 @@ namespace OOPGroup4
         /// <summary>
         /// Create a new timeTable.
         /// </summary>
-        /// <param name="listClasse"></param>
-        /// <param name="nomClasse"></param>
-        /// <param name="listSubject"></param>
+        /// <param first_name="listClasse"></param>
+        /// <param first_name="nomClasse"></param>
+        /// <param first_name="listSubject"></param>
         public void CreateTimeTable(List<Student> studentList, List<Faculty_member> teacherList)
         {
             int startYear = 0;
@@ -243,9 +243,9 @@ namespace OOPGroup4
         /// Add new subject to the admin's TimeTable wich the student will be able to choose 
         /// for their own TimeTable.
         /// </summary>
-        /// <param name="listClasse"></param>
-        /// <param name="nomClasse"></param>
-        /// <param name="listSubject"></param>
+        /// <param first_name="listClasse"></param>
+        /// <param first_name="nomClasse"></param>
+        /// <param first_name="listSubject"></param>
         public void Add_CourseToTimetable(Student student)
         {
             DisplayTimeTable(student);
@@ -312,7 +312,7 @@ namespace OOPGroup4
             string topic;
             string professor;
             string description;
-            Faculty_member teacher = new Faculty_member("","","","","","",0,"","","",new List<Student>(), promoAdmin);
+            Faculty_member teacher = new Faculty_member("","","","","","","","",new List<Student>(), promoAdmin);
             do
             {
                 Console.WriteLine("Select and write the topic of the course");
@@ -446,7 +446,7 @@ namespace OOPGroup4
                     timer--;
                 }
             } while (timer < 0);
-            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>(), promoAdmin);
+            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", "", "", new List<Student>(), promoAdmin);
 
 
 
@@ -611,7 +611,7 @@ namespace OOPGroup4
                     timer--;
                 }
             } while (timer < 0);
-            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>(), promoAdmin); string topic = "";
+            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", "", "", new List<Student>(), promoAdmin); string topic = "";
             string professor = "";
             string description = "";
             for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
@@ -704,8 +704,8 @@ namespace OOPGroup4
             string topic;
             string professor;
 
-            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>(), promoAdmin);
-            Faculty_member oldTeacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>(), promoAdmin);
+            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", "", "", new List<Student>(), promoAdmin);
+            Faculty_member oldTeacher = new Faculty_member("", "", "", "", "", "", "", "", new List<Student>(), promoAdmin);
             do
             {
                 Console.WriteLine("Select and write the new topic of the course");
@@ -851,7 +851,7 @@ namespace OOPGroup4
 
             } while (timer < 0);
 
-            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", 0, "", "", "", new List<Student>(), promoAdmin);
+            Faculty_member teacher = new Faculty_member("", "", "", "", "", "", "", "", new List<Student>(), promoAdmin);
             Console.WriteLine("Write the new description");
             string description = Console.ReadLine();
             for (int i = starthour - 7; i < starthour - 7 + nbhour; i++)
@@ -911,7 +911,7 @@ namespace OOPGroup4
         /// Allows to change the parameter "active" from the absence from 1 to 0.
         /// The admin can then add a comment to justificate the absence.
         /// </summary>
-        /// <param name="nameStudent"></param>
+        /// <param first_name="nameStudent"></param>
         public void JustifyAnAbsence(string student_id, int absNumber, string comment)
         {
             Student student = FindStudent(student_id);
@@ -924,7 +924,7 @@ namespace OOPGroup4
         /// <summary>
         /// returns the student that corresponds to the id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param first_name="id"></param>
         public Student FindStudent(string id)
         {
             return promoAdmin.ListStudentPromo.Find(x => x.Id == id);
@@ -934,7 +934,7 @@ namespace OOPGroup4
             return promoAdmin.ListTeacherPromo.Find(x => x.Id == id);
         }
         /// <summary>
-        /// Get the name, field of study, and the information relative 
+        /// Get the first_name, field of study, and the information relative 
         /// to the classe Member_of_school
         /// </summary>
         public string GetTeacherFile(string teacher_id)
@@ -942,9 +942,9 @@ namespace OOPGroup4
             string info = "";
             Faculty_member teacher = FindTeacher(teacher_id);
 
-            info = ("Surname:" + teacher.Surname + " Name:" + teacher.Name
+            info = ("Last_name:" + teacher.Last_name + " First_name:" + teacher.First_name
                        + "\n Fields of study: " + teacher.Subject
-                       + "\n Age: " + teacher.Age + " Sexe: " + teacher.Sexe
+                       + "\n Date_of_birth: " + teacher.Date_of_birth + " Gender: " + teacher.Gender
                        + "\n email: " + teacher.Mail);
             return info;
 
@@ -960,8 +960,8 @@ namespace OOPGroup4
         {
             Student student = FindStudent(student_id);
             string info = "";
-            info = ("Surname:" + student.Surname + " Name:" + student.Name
-                        + "\n Age: " + student.Age + " Sexe: " + student.Sexe
+            info = ("Last_name:" + student.Last_name + " First_name:" + student.First_name
+                        + "\n Date_of_birth: " + student.Date_of_birth + " Gender: " + student.Gender
                         + "\n email: " + student.Mail
                         + "\n Number of absence: " + NumberOfAbsence(student)
                         + "\n The student has payed everything: " + HasPayedEverything(student_id));
@@ -977,7 +977,7 @@ namespace OOPGroup4
             string info = "";
             foreach (Payment payment in FindStudent(student_id).Payment_list)
             {
-                info += ("Payer's name : " + payment.Payer_name + "\nPayment method : " + payment.Payment_method + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString());
+                info += ("Payer's first_name : " + payment.Payer_name + "\nPayment method : " + payment.Payment_method + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString());
             }
             return info;
         }
@@ -990,7 +990,7 @@ namespace OOPGroup4
             Invoice invoice = FindStudent(student_id).Invoice_list.Find(x => x.Title == invoice_title);
             foreach (Payment payment in invoice.Payments)
             {
-                info += ("Payer's name : " + payment.Payer_name + "\nPayment method : " + payment.Payment_method + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString());
+                info += ("Payer's first_name : " + payment.Payer_name + "\nPayment method : " + payment.Payment_method + "\nAmount : " + payment.Amount + "\nDate : " + payment.Date.ToString());
             }
             return info;
         }

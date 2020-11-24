@@ -11,7 +11,8 @@ namespace OOPGroup4
         private List<Absence> absence_list;
         private List<Evaluation> studentEvaluation;
         private Timetable timetable;
-        public Student(string place, string school_name, string id, string name, string surname, string password, int age, string sexe, string mail) : base(place, name, id, name, surname, password, age, sexe, mail)
+        public Student(string id, string first_name, string last_name, string password,string date_of_birth, string gender, string mail) 
+            : base(id, first_name, last_name, password, date_of_birth, gender, mail)
         {
             
         }
